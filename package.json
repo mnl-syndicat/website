@@ -1,0 +1,27 @@
+{
+  "name": "nuxt-app",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "pull": "npx tsx get-data.ts",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.14",
+    "@nuxt/image": "^1.6.0",
+    "dotenv": "^16.4.5",
+    "nuxt": "^3.11.1",
+    "sass": "^1.75.0",
+    "vue": "^3.4.21",
+    "vue-router": "^4.3.0"
+  },
+  "devDependencies": {
+    "normalize.css": "^8.0.1",
+    "nuxt-icon": "^0.6.10",
+    "vue-notion": "^3.0.0-beta.1"
+  }
+}

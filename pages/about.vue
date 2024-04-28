@@ -3,7 +3,6 @@
 </script>
 
 <template>
-  <top-bar/>
   <about-where/>
   <about-missions/>
   <about-equipe-nationale/>

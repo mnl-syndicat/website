@@ -1,6 +1,4 @@
 <template>
-  <top-bar />
-
   <section class="materiel">
     <h2>MATÉRIEL MILITANT</h2>
 

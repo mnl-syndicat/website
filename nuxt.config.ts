@@ -10,4 +10,10 @@ export default defineNuxtConfig({
     build: {
         transpile: ['vue-notion'],
     },
+
+    runtimeConfig: {
+        public: {
+            COMMIT_SHA: process.env.NUXT_ENV_CURRENT_GIT_SHA || 'latest',
+        }
+    }
 })

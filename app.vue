@@ -24,7 +24,9 @@ useHead({
 </script>
 
 <template>
-   <NuxtPage/>
+  <top-bar />
+  <NuxtPage/>
+  <foot />
 </template>
 
 <style scoped lang="scss">

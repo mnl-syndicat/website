@@ -12,8 +12,6 @@ const {data: blockMap} = useAsyncData(article.link, () =>
 </script>
 
 <template>
-  <top-bar/>
-
   <section id="article">
     <h1>{{ article.title }}</h1>
 

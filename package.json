@@ -3,10 +3,10 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "dev": "nuxt dev",
+    "build": "NUXT_ENV_CURRENT_GIT_SHA=`git rev-parse --short HEAD` nuxt build",
+    "dev": "NUXT_ENV_CURRENT_GIT_SHA=`git rev-parse --short HEAD` nuxt dev",
     "pull": "npx tsx get-data.ts",
-    "generate": "nuxt generate",
+    "generate": "NUXT_ENV_CURRENT_GIT_SHA=`git rev-parse --short HEAD` nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },

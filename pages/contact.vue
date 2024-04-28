@@ -1,9 +1,4 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-  <top-bar/>
   <section>
     <h2>CONTACT</h2>
     <p>

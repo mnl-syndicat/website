@@ -1,6 +1,4 @@
 <template>
-  <top-bar/>
-
   <section>
     <h2>ARTICLES</h2>
     <div class="card-grid">

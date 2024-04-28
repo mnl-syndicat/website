@@ -26,7 +26,7 @@ const showNavMenu = () => {
     <li>
       <router-link to="/about">À Propos</router-link>
       <router-link to="/articles">Articles</router-link>
-      <router-link to="/contact">Contact & Presse</router-link>
+      <router-link to="/contact">Contact</router-link>
       <router-link to="/materiel">Matériel</router-link>
       <btn :label="getString('joinButton')" href="https://www.mnl-syndicat.fr/adherer"/>
     </li>

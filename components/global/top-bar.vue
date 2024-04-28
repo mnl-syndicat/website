@@ -19,7 +19,7 @@ const showNavMenu = () => {
   <header :class="scrolled ? 'scrolled' : ''">
     <div class="left">
       <Icon name="mdi:menu" v-on:click="showNavMenu()"/>
-      <h1>MNL</h1>
+      <router-link to="/"><h1>MNL</h1></router-link>
       <router-link to="/"><img :src="getImage('orgLogo')" alt="Organization logo"></router-link>
     </div>
 

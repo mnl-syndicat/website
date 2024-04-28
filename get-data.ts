@@ -28,9 +28,7 @@ async function downloadImage(url: string, imagePath: string) {
         if (extension === '.png' || extension === '.jpg' || extension === '.jpeg') {
             const webpPath = imagePath.replace(extension, '.webp');
             await sharp(imagePath).webp().toFile(webpPath);
-            console.log(`🖼️ Image ${imagePath} converted to webp!`);
             fs.unlinkSync(imagePath);
-            console.log(`🖼️ Original image ${imagePath} deleted!`);
         }
     });
 }

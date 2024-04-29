@@ -67,6 +67,8 @@ section#article {
 
 @media (max-width: 768px) {
   section#article {
+    padding: 50px 5vw;
+
     h1 {
       font-size: 42px;
       margin-bottom: 20px;

@@ -45,7 +45,7 @@ section#article {
 
   li, ol {
     margin-left: 20px;
-    word-break: break-all;
+    word-break: break-word;
   }
 
   img {
@@ -67,7 +67,7 @@ section#article {
 
 @media (max-width: 768px) {
   section#article {
-    padding: 50px 5vw;
+    padding: 50px 7.5vw;
 
     h1 {
       font-size: 42px;

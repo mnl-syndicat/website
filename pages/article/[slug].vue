@@ -76,7 +76,7 @@ section#article {
 
     .notion-h1 {
       font-size: 28px;
-      margin: 20px 0;
+      margin: 10px 0;
     }
 
     p, li {

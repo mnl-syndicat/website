@@ -76,11 +76,11 @@ section#article {
 
 @media (max-width: 768px) {
   section#article {
-    padding: 50px 7.5vw;
+    padding: 30px 7.5vw;
 
     h1 {
       font-size: 42px;
-      margin-bottom: 20px;
+      margin-bottom: 0;
     }
 
     .notion-h1 {
@@ -97,9 +97,10 @@ section#article {
       margin-left: 20px;
     }
 
-    img {
+    figure {
       width: 100%;
       margin: 15px 0;
+      padding: 10px;
     }
   }
 }

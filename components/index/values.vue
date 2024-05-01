@@ -33,7 +33,7 @@ section {
   }
 
   .container {
-    width: 30vw;
+    width: 40vw;
   }
 
   h2 {

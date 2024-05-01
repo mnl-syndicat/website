@@ -12,6 +12,7 @@
 
 <style scoped lang="scss">
 .icon-list-el img {
-  transform: scale(1.3);
+  width: 70px;
+  height: 70px;
 }
 </style>

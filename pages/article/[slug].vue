@@ -48,12 +48,21 @@ section#article {
     word-break: break-word;
   }
 
-  img {
+  figure {
     width: 50%;
     margin: 15px 0 15px 25%;
     border-radius: 3px;
     border: 1px solid #000;
+    padding: 10px;
+    background: var(--surface-background-color);
+
+    img {
+      width: 100%;
+      border-radius: 3px;
+      margin-bottom: 10px;
+    }
   }
+
 
   .notion-asset-wrapper div {
     padding-bottom: 0 !important;

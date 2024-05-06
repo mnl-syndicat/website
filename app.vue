@@ -20,6 +20,9 @@ useHead({
     { rel: 'icon', type: 'image/png', href: getImage('orgLogo') },
     { rel: 'apple-touch-icon', href: getImage('orgLogo') },
   ],
+  htmlAttrs: {
+    lang: 'fr',
+  },
 })
 </script>
 

@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h2>PARTENAIRES</h2>
+    <h1>PARTENAIRES</h1>
     <div class="icon-list">
       <a :href="partner.link" class="icon-list-el" v-for="partner in getPartners()">
         <img :src="partner.icon" alt="">

@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h2>ARTICLES</h2>
+    <h1>ARTICLES</h1>
     <div class="card-grid">
       <router-link v-for="article in getArticles()" :to="'/article/' + article.link" class="card">
         <img :src="article.image" alt="">

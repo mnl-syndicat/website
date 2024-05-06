@@ -6,6 +6,7 @@ import partners from '../static/partners.json'
 import socials from '../static/socials.json'
 import missions from '../static/missions.json'
 import materiel from '../static/materiel.json'
+import federations from '../static/federations.json'
 
 function findPage(id: string, database: any[]) {
     for (const string of strings) {
@@ -134,4 +135,25 @@ export const getMateriel = () => {
     }
 
     return processedMateriel;
+}
+
+export const getFederations = () => {
+    let processedFederations = [];
+
+    for (const federation of federations) {
+        processedFederations.push({
+            name: federation.properties.Departement.title[0].plain_text,
+            code: federation.properties.Code.rich_text[0].plain_text,
+            email: federation.properties.Email.email,
+            active: federation.properties.Active.checkbox,
+            instagram: federation.properties.Instagram.url,
+            notionId: federation.id
+        })
+    }
+
+    processedFederations.sort((a, b) => {
+        return a.code.localeCompare(b.code);
+    });
+
+    return processedFederations;
 }

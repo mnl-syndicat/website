@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h2>CONTACT</h2>
+    <h1>CONTACT</h1>
     <p>
       <Icon name="mdi:email" /> Mail : <a :href="'mailto:' + getString('orgEmail')">{{ getString('orgEmail') }}</a> <br>
       <Icon name="mdi:phone" /> Téléphone : <a :href="'tel:' + getString('orgPhone')">{{ getString('orgPhone') }}</a> <br>
@@ -17,10 +17,6 @@ section {
   padding: 50px 15vw;
   flex-direction: column;
   gap: 50px;
-
-  h2 {
-    text-align: center;
-  }
 
   p {
     font-size: 25px;

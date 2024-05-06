@@ -11,7 +11,7 @@ section {
   background-position: center;
   background-color: var(--main-cta-color);
   padding: 10vh 20vh;
-  gap: 20px;
+  gap: 0;
   flex-direction: column;
   color: #FFF;
 
@@ -29,7 +29,6 @@ section {
 @media (max-width: 768px) {
   section {
     padding: 5vh 5vh;
-    gap: 20px;
 
     h1 {
       font-size: 42px;

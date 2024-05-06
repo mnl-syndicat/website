@@ -1,9 +1,9 @@
 <template>
   <section class="about">
     <div class="container">
-      <h2>{{ getString('whereCategoryName') }}</h2>
+      <h1>{{ getString('whereCategoryName') }}</h1>
       <p>{{ getString('whereValue') }}</p>
-      <btn href="/contact" :label="getString('whereButton')"/>
+      <btn href="/federations" :label="getString('whereButton')"/>
     </div>
     <img :src="getImage('valuesIllus')" alt="">
   </section>

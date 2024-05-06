@@ -98,6 +98,10 @@ const databases = [
     {
         name: "materiel",
         id: "d449fd03594e452684979b8e01e94ec7"
+    },
+    {
+        name: "federations",
+        id: "781737202074478f8a28f89709c8a0f8"
     }
 ];
 

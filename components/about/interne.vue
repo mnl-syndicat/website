@@ -1,7 +1,7 @@
 <template>
   <section class="about">
     <div class="container">
-      <h2>{{ getString('interneCategoryName') }}</h2>
+      <h1>{{ getString('interneCategoryName') }}</h1>
       <p>{{ getString('interneValue') }}</p>
     </div>
     <img :src="getImage('interneCategoryImage')" alt="">

@@ -5,7 +5,7 @@
 <template>
   <section>
     <div class="container">
-      <h2>{{ getString('valuesCategoryName') }}</h2>
+      <h1>{{ getString('valuesCategoryName') }}</h1>
       <div class="values">
         <div class="value" v-for="value in getValues()" :key="value.id">
           <div class="title">
@@ -36,7 +36,7 @@ section {
     width: 40vw;
   }
 
-  h2 {
+  h1 {
     margin-bottom: 20px;
   }
 

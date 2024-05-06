@@ -27,8 +27,9 @@ const showNavMenu = () => {
       <router-link to="/about">À Propos</router-link>
       <router-link to="/articles">Articles</router-link>
       <router-link to="/contact">Contact</router-link>
+      <router-link to="/federations">Fédérations</router-link>
       <router-link to="/materiel">Matériel</router-link>
-      <btn :label="getString('joinButton')" href="https://www.mnl-syndicat.fr/adherer"/>
+      <btn icon="mdi:person-add" :label="getString('joinButton')" href="/adherer"/>
     </li>
   </header>
 </template>
@@ -74,13 +75,22 @@ header {
   li {
     display: flex;
     list-style-type: none;
-    gap: 10px;
+    gap: 15px;
     align-items: center;
     @include title-font;
     font-weight: 600;
     font-size: 18px;
 
-    a {
+    a:not(.btn) {
+      transition: 0.1s ease-in-out;
+
+      &:hover {
+        color: var(--darker-cta-color);
+        font-weight: 700;
+      }
+    }
+
+    .btn {
       margin-left: 25px;
     }
   }

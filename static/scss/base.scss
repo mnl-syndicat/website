@@ -7,6 +7,7 @@
 }
 
 :root {
+  --lighter-cta-color: #b7abb7;
   --main-cta-color: #5A3C5A;
   --darker-cta-color: #4b394b;
   --main-background-color: #f7f5f8;
@@ -44,7 +45,7 @@ h1, h2, h3, h4, h5, p {
   line-height: 1.4;
 }
 
-h2 {
+h1 {
   font-size: 50px;
   font-weight: 800;
 }
@@ -154,7 +155,7 @@ section {
     padding: 25px 5vw;
   }
 
-  h2 {
+  h1 {
     font-size: 34px;
   }
 

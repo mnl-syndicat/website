@@ -5,7 +5,7 @@
 <template>
   <section>
     <div class="titleBar">
-      <h2>DERNIERS ARTICLES</h2>
+      <h1>DERNIERS ARTICLES</h1>
       <btn label="VOIR TOUT" href="/articles"></btn>
     </div>
     <div class="articles">

@@ -2,7 +2,7 @@
   <section class="about">
     <img :src="getImage('historyCategoryImage')" alt="">
     <div class="container">
-      <h2>{{ getString('historyCategoryName') }}</h2>
+      <h1>{{ getString('historyCategoryName') }}</h1>
       <p>{{ getString('historyValue') }}</p>
     </div>
   </section>

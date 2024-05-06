@@ -14,9 +14,7 @@
 section {
   width: 100vw;
   display: flex;
-  padding: 50px 15vw;
   flex-direction: column;
-  gap: 50px;
 
   p {
     font-size: 25px;
@@ -32,6 +30,20 @@ section {
       width: 30px;
       height: 30px;
       margin-right: 10px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  section {
+    p {
+      font-size: 20px;
+
+      svg {
+        width: 26px;
+        height: 26px;
+        margin-right: 5px;
+      }
     }
   }
 }

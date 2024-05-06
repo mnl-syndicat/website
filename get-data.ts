@@ -62,7 +62,7 @@ async function writeDatabase(database: { name: string, id: string }) {
     }
 
     fs.writeFile(path.join(path.resolve(), `static/${database.name}.json`), JSON.stringify(data), () => {
-        console.log(`✨  Database ${database.name} written!`)
+        console.log(`✨ Database ${database.name} written!`)
     });
 }
 

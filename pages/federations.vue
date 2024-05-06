@@ -59,14 +59,16 @@ onMounted(() => {
   <section class="federations" >
     <h1>FÉDÉRATIONS</h1>
     <main>
-      <div class="federation-list">
+      <div class="federation-list-wrapper">
         <div class="searchBar">
           <input type="text" v-model="searchTerm" placeholder="Hautes-Alpes">
           <Icon name="mdi:search" />
         </div>
 
-        <div v-for="federation in filteredFederations" :key="federation.code" class="federation">
-          <a :href="'/' + federation.code">{{ federation.code }} {{ federation.name }}</a>
+        <div class="federation-list">
+          <div v-for="federation in filteredFederations" :key="federation.code" class="federation">
+            <a :href="'/' + federation.code">{{ federation.code }} {{ federation.name }}</a>
+          </div>
         </div>
       </div>
 
@@ -86,14 +88,20 @@ onMounted(() => {
   justify-content: space-evenly;
 }
 
-.federation-list {
+.federation-list-wrapper {
   background: var(--surface-background-color);
   @include main-border;
   padding: 20px;
   border-radius: 3px;
   width: 30%;
   height: 60vh;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+
+  .federation-list {
+    overflow-y: auto;
+    padding-left: 10px;
+  }
 
   .searchBar {
     display: flex;
@@ -134,15 +142,12 @@ onMounted(() => {
   }
 }
 
-.federations svg {
+.federations svg.nuxt-icon {
   height: 60vh;
   width: auto;
 
   path {
     fill: var(--lighter-cta-color) !important;
-    -webkit-transform: scale(1);
-    -webkit-transform-origin: 50% 50%;
-    -webkit-transition:.3s;
     transform: scale(1);
     transform-origin: 50% 50%;
     transition:.3s;
@@ -171,7 +176,7 @@ onMounted(() => {
     width: 90vw;
   }
 
-  .federation-list {
+  .federation-list-wrapper {
     width: 100%;
     height: 50vh;
   }

@@ -13,6 +13,11 @@ const showNavMenu = () => {
   const nav = document.querySelector('li')
   nav.classList.toggle('show')
 }
+
+const hideNavMenu = () => {
+  const nav = document.querySelector('li')
+  nav.classList.remove('show')
+}
 </script>
 
 <template>
@@ -24,12 +29,12 @@ const showNavMenu = () => {
     </div>
 
     <li>
-      <router-link to="/about">À Propos</router-link>
-      <router-link to="/articles">Articles</router-link>
-      <router-link to="/contact">Contact</router-link>
-      <router-link to="/federations">Fédérations</router-link>
-      <router-link to="/materiel">Matériel</router-link>
-      <btn icon="mdi:person-add" :label="getString('joinButton')" href="/adherer"/>
+      <router-link to="/about" @click="hideNavMenu">À Propos</router-link>
+      <router-link to="/articles" @click="hideNavMenu">Articles</router-link>
+      <router-link to="/contact" @click="hideNavMenu">Contact</router-link>
+      <router-link to="/federations" @click="hideNavMenu">Fédérations</router-link>
+      <router-link to="/materiel" @click="hideNavMenu">Matériel</router-link>
+      <btn icon="mdi:person-add" :label="getString('joinButton')" href="/adherer" @click="hideNavMenu" />
     </li>
   </header>
 </template>
@@ -100,7 +105,7 @@ header {
   header {
     padding: 15px 25px;
     height: max-content;
-    min-height: 90px;
+    min-height: 80px;
     flex-direction: column;
 
     &.scrolled {

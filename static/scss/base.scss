@@ -152,7 +152,8 @@ section {
 
 @media (max-width: 768px) {
   section {
-    padding: 25px 5vw;
+    padding: 30px 5vw;
+    gap: 30px;
   }
 
   h1 {
@@ -164,7 +165,7 @@ section {
   }
 
   body {
-    padding-top: 90px;
+    padding-top: 80px;
   }
 
   .icon-list {

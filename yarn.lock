@@ -758,10 +758,10 @@
     which "^3.0.1"
     ws "^8.16.0"
 
-"@nuxt/image@^1.7.0":
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/@nuxt/image/-/image-1.7.0.tgz#2df37d83d16083eafc2207dd4064e1d4553e1af0"
-  integrity sha512-zSj32bLgbV9AvLkLX0pF52J5KBfSyj0eSIdpXCtTJATSZlqgcJigoCvmabC1nbcMIp0SZ29Bu9+acQpGTQKz+g==
+"@nuxt/image@^1.6.0":
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/@nuxt/image/-/image-1.6.0.tgz#c54cc1da0994ed3fa72205be7bfafa3255d820a9"
+  integrity sha512-rgi7u6v/Dz/Ye87ym5Yg6nJtyDZgqog3G4k1AH7h5ug76JxiM727up5wpWb1AhHFb6vsW2ttteA6mPwwRyuENQ==
   dependencies:
     "@nuxt/kit" "^3.11.2"
     consola "^3.2.3"

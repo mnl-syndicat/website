@@ -13,6 +13,7 @@
   "dependencies": {
     "@notionhq/client": "^2.2.14",
     "@nuxt/image": "^1.7.0",
+    "@nuxtjs/sitemap": "^5.1.5",
     "dotenv": "^16.4.5",
     "nuxt": "^3.11.1",
     "sass": "^1.75.0",

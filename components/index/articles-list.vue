@@ -11,7 +11,7 @@
     <div class="articles">
       <article v-for="article in getArticles().slice(0, 5)" :key="article.link">
         <router-link class="card" :to="'/article/' + article.link">
-          <img :src="article.image" alt="">
+          <NuxtImg height="300" :src="article.image" alt="" />
           <h3>{{ article.title }}</h3>
         </router-link>
       </article>

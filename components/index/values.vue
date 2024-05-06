@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-    <img :src="getImage('valuesIllus')" id="valuesIllus" alt="">
+    <NuxtImg quality="10" :src="getImage('valuesIllus')" id="valuesIllus" alt="" />
   </section>
 </template>
 

@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    modules: ['nuxt-icon', 'nuxt-svgo'],
+    modules: ['nuxt-icon', 'nuxt-svgo', '@nuxtjs/google-fonts'],
 
     css: [
         '@/node_modules/normalize.css/normalize.css',
@@ -9,6 +9,12 @@ export default defineNuxtConfig({
 
     build: {
         transpile: ['vue-notion'],
+    },
+
+    googleFonts: {
+        families: {
+            'Schibsted Grotesk': [400, 500, 600, 700, 800, 900],
+        }
     },
 
     runtimeConfig: {

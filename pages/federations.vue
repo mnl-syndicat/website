@@ -137,7 +137,7 @@ onMounted(() => {
   height: 60vh;
   width: auto;
 
-  .i-877458788__departement {
+  path {
     fill: var(--lighter-cta-color) !important;
     -webkit-transform: scale(1);
     -webkit-transform-origin: 50% 50%;
@@ -146,6 +146,9 @@ onMounted(() => {
     transform-origin: 50% 50%;
     transition:.3s;
     transform-box: fill-box;
+    stroke: #FFF;
+    stroke-width: 1px;
+
 
     &.active {
       fill: var(--main-cta-color) !important;

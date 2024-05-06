@@ -14,13 +14,6 @@ useHead({
     { name: 'description', content: `Espace de la fédération ${federation.name} du MNL` },
   ],
 });
-
-onMounted(() => {
-  const links = document.querySelectorAll('.notion-page-link');
-  links.forEach(link => {
-    link.setAttribute('href', '/' + fedeCode + link.getAttribute('href'));
-  });
-});
 </script>
 
 <template>
@@ -37,6 +30,7 @@ onMounted(() => {
 
     <NotionRenderer
         :blockMap="blockMap"
+        :mapPageUrl="pageId => '/' + fedeCode + '/' + pageId"
     />
   </section>
 </template>

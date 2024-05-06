@@ -17,6 +17,20 @@ export default defineNuxtConfig({
         }
     },
 
+    svgo: {
+        svgoConfig: {
+            plugins: [
+                {
+                    name: "prefixIds",
+                    params: {
+                        prefixIds: false,
+                        prefixClassNames: false
+                    }
+                },
+            ]
+        },
+    },
+
     runtimeConfig: {
         public: {
             COMMIT_SHA: process.env.NUXT_ENV_VERCEL_GIT_COMMIT_SHA || process.env.NUXT_ENV_CURRENT_GIT_SHA || 'latest',

@@ -1,3 +1,14 @@
+<script setup>
+useHead({
+  title: 'MNL — Adhérer',
+  meta: [
+    {name: 'description', content: 'Adhérer au Mouvement National Lycéen'},
+    {name: 'og:title', content: 'Mouvement National Lycéen — Adhérer'},
+    {name: 'og:description', content: 'Adhérer au Mouvement National Lycéen'},
+  ],
+})
+</script>
+
 <template>
   <section id="adherer">
     <h1>ADHÉRER</h1>

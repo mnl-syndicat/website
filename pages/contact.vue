@@ -1,3 +1,14 @@
+<script setup>
+useHead({
+  title: 'MNL — Contact',
+  meta: [
+    {name: 'description', content: 'Contacter le Mouvement National Lycéen'},
+    {name: 'og:title', content: 'Mouvement National Lycéen — Contact'},
+    {name: 'og:description', content: 'Contacter le Mouvement National Lycéen'},
+  ],
+})
+</script>
+
 <template>
   <section>
     <h1>CONTACT</h1>

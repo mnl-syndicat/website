@@ -23,6 +23,8 @@ onMounted(() => {
     title: `MNL ${federation.code} — ${title.value}`,
     meta: [
       {name: 'description', content: `Espace de la fédération ${federation.name} du MNL`},
+      {name: 'og:title', content: `MNL ${federation.code} — ${title.value}`},
+      {name: 'og:description', content: `Espace de la fédération ${federation.name} du MNL`},
     ],
   });
 });

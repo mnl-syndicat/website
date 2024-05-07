@@ -1,3 +1,14 @@
+<script setup>
+useHead({
+  title: 'MNL — Articles',
+  meta: [
+    {name: 'description', content: 'Retrouvez tous les articles du Mouvement National Lycéen'},
+    {name: 'og:title', content: 'Mouvement National Lycéen — Articles'},
+    {name: 'og:description', content: 'Retrouvez tous les articles du Mouvement National Lycéen'},
+  ],
+})
+</script>
+
 <template>
   <section>
     <h1>ARTICLES</h1>

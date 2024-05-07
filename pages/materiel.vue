@@ -1,3 +1,14 @@
+<script setup>
+useHead({
+  title: 'MNL — Matériel Militant',
+  meta: [
+    {name: 'description', content: 'Retrouvez tout le matériel militant du Mouvement National Lycéen'},
+    {name: 'og:title', content: 'Mouvement National Lycéen — Matériel Militant'},
+    {name: 'og:description', content: 'Retrouvez tout le matériel militant du Mouvement National Lycéen'},
+  ],
+})
+</script>
+
 <template>
   <section class="materiel">
     <h1>MATÉRIEL MILITANT</h1>

@@ -12,6 +12,8 @@ useHead({
   title: `MNL ${federation.code} (${federation.name})`,
   meta: [
     { name: 'description', content: `Espace de la fédération ${federation.name} du MNL` },
+    { name: 'og:title', content: `MNL ${federation.code} (${federation.name})` },
+    { name: 'og:description', content: `Espace de la fédération ${federation.name} du MNL` },
   ],
 });
 </script>

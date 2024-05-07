@@ -8,10 +8,7 @@
       <h1>{{ getString('valuesCategoryName') }}</h1>
       <div class="values">
         <div class="value" v-for="value in getValues()" :key="value.id">
-          <div class="title">
-            <img :src="value.icon" alt="icon"/>
-            <h3>{{ value.title }}</h3>
-          </div>
+            <h3 class="title"><img :src="value.icon" alt="icon"/> {{ value.title }}</h3>
           <p>{{ value.description }}</p>
         </div>
       </div>
@@ -30,6 +27,10 @@ section {
     border: 1px solid #000;
     object-fit: cover;
     border-radius: 3px;
+  }
+
+  h3.title {
+    word-break: break-all;
   }
 
   .container {
@@ -77,13 +78,19 @@ section {
   }
 }
 
+@media (max-width: 1100px) {
+  #valuesIllus {
+    display: none;
+  }
+
+  section .container {
+    width: 80vw;
+  }
+}
+
 @media (max-width: 768px) {
   section {
     flex-direction: column;
-
-    #valuesIllus {
-      display: none;
-    }
 
     .container {
       width: 80vw;

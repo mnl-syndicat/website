@@ -8,7 +8,7 @@ import missions from '../static/missions.json'
 import materiel from '../static/materiel.json'
 import federations from '../static/federations.json'
 
-function findPage(id: string, database: any[]) {
+function findPage(id: string) {
     for (const string of strings) {
         if (string.properties.ID.rich_text.length > 0 && string.properties.ID.rich_text[0].plain_text === id) {
             return string
@@ -64,7 +64,7 @@ export const getArticles = () => {
     });
 
     for (const article of articles) {
-        if (article.properties.Publié.checkbox === true && article.properties.ID.title.length > 0 && article.properties.Image.files.length > 0 && article.properties.Lien.rich_text.length > 0 && article.properties.Date.date.start) {
+        if (article.properties.Publie.checkbox === true && article.properties.ID.title.length > 0 && article.properties.Image.files.length > 0 && article.properties.Lien.rich_text.length > 0 && article.properties.Date.date.start) {
             processedArticles.push({
                 title: article.properties.ID.title[0].plain_text,
                 image: article.properties.Image.files[0].file.url,
@@ -129,7 +129,7 @@ export const getMateriel = () => {
             processedMateriel.push({
                 title: item.properties.ID.title[0].plain_text,
                 image: item.properties.Image.files[0].file.url,
-                file: item.properties.File.files[0].file.url
+                file: "https://www.notion.so/signed/" + encodeURIComponent(item.properties.File.files[0].file.url.replace(/\?.*$/, '')) + "?table=block&id=" + item.id.replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5'),
             })
         }
     }

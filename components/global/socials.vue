@@ -2,7 +2,7 @@
   <section>
     <h1>NOS RÉSEAUX</h1>
     <div class="icon-list">
-      <a :href="social.link" class="icon-list-el" v-for="social in getSocials()">
+      <a :href="social.link" class="icon-list-el" v-for="social in getSocials()" target="_blank">
         <NuxtImg width="40" height="40" :src="social.icon" alt="" />
         <p>{{ social.name }}</p>
       </a>

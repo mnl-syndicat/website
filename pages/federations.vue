@@ -45,9 +45,10 @@ const filteredFederations = computed(() => {
 onMounted(() => {
   for (const federation of federations) {
     if (federation.active) {
-      document.querySelector('.departement' + federation.code).classList.add('active');
+      console.log(federation.code.toLowerCase());
+      document.querySelector('.departement' + federation.code.toLowerCase()).classList.add('active');
 
-      document.querySelector('.departement' + federation.code).addEventListener('click', () => {
+      document.querySelector('.departement' + federation.code.toLowerCase()).addEventListener('click', () => {
         window.location.href = '/' + federation.code;
       });
     }

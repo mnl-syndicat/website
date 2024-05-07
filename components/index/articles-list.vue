@@ -31,12 +31,11 @@ section {
     width: 100%;
   }
 
-
   .articles {
     display: flex;
     overflow-x: auto;
     width: 100vw;
-    padding: 5px 5px 5px 15vw;
+    padding: 5px 30px 5px 15vw;
     gap: 40px;
 
     article a {

@@ -22,8 +22,8 @@
 
 <style scoped lang="scss">
 section {
-  gap: 10vw;
   flex-direction: row;
+  padding: 50px 5vw;
 
   #valuesIllus {
     width: 25vw;
@@ -33,7 +33,8 @@ section {
   }
 
   .container {
-    width: 40vw;
+    width: 60vw;
+    max-width: 750px;
   }
 
   h1 {

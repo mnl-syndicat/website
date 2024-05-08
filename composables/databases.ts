@@ -19,12 +19,12 @@ function findPage(id: string) {
 }
 
 export const getString = (id: string) => {
-    const page = findPage(id, strings);
+    const page = findPage(id);
     return page && page.properties.Contenu.rich_text.length > 0 ? page.properties.Contenu.rich_text[0].plain_text : "String not found";
 }
 
 export const getImage = (id: string) => {
-    const page = findPage(id, strings);
+    const page = findPage(id);
     return page && page.properties.Image.files.length > 0 ? page.properties.Image.files[0].file.url : "Image not found";
 }
 

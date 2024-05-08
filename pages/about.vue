@@ -10,6 +10,7 @@ useHead({
 </script>
 
 <template>
+  <top-bar current-tab="/about" />
   <about-where/>
   <about-missions/>
   <about-equipe-nationale/>

@@ -10,6 +10,7 @@ useHead({
 </script>
 
 <template>
+  <top-bar current-tab="/materiel" />
   <section class="materiel">
     <h1>MATÉRIEL MILITANT</h1>
 

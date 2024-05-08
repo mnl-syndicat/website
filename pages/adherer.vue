@@ -10,6 +10,7 @@ useHead({
 </script>
 
 <template>
+  <top-bar />
   <section id="adherer">
     <h1>ADHÉRER</h1>
 

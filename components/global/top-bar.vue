@@ -1,41 +1,55 @@
 <script setup lang="ts">
-let scrolled = ref(false)
+const props = defineProps({
+  currentTab: String,
+});
+
+const scrolled = ref(false);
+const menuToggled = ref(false);
+const smallScreen = ref(false);
 
 const handleScroll = () => {
   scrolled.value = window.scrollY > 50;
-}
+};
 
 onMounted(() => {
-  window.addEventListener('scroll', handleScroll)
-})
+  window.addEventListener('scroll', handleScroll);
+  smallScreen.value = window.innerWidth < 768;
+  window.addEventListener('resize', () => {
+    smallScreen.value = window.innerWidth < 768;
+  });
+});
 
-const showNavMenu = () => {
-  const nav = document.querySelector('li')
-  nav.classList.toggle('show')
-}
+const toggleNavMenu = () => {
+  menuToggled.value = !menuToggled.value;
+};
 
-const hideNavMenu = () => {
-  const nav = document.querySelector('li')
-  nav.classList.remove('show')
-}
+const links = {
+  '/': 'Accueil',
+  '/about': 'À Propos',
+  '/articles': 'Articles',
+  '/contact': 'Contact',
+  '/federations': 'Fédérations',
+  '/materiel': 'Matériel',
+};
 </script>
 
 <template>
-  <header :class="scrolled ? 'scrolled' : ''">
-    <div class="left">
-      <Icon name="mdi:menu" v-on:click="showNavMenu()"/>
-      <router-link to="/"><h1>MNL</h1></router-link>
+  <header :class="{ scrolled }">
+    <div class="nav-el">
+      <Icon :name="menuToggled ? 'mdi:close' : 'mdi:menu'" v-if="smallScreen" @click="toggleNavMenu()" />
+      <h3 v-if="smallScreen">MNL</h3>
       <router-link to="/"><img :src="getImage('orgLogo')" alt="Organization logo"></router-link>
     </div>
 
-    <li>
-      <router-link to="/about" @click="hideNavMenu">À Propos</router-link>
-      <router-link to="/articles" @click="hideNavMenu">Articles</router-link>
-      <router-link to="/contact" @click="hideNavMenu">Contact</router-link>
-      <router-link to="/federations" @click="hideNavMenu">Fédérations</router-link>
-      <router-link to="/materiel" @click="hideNavMenu">Matériel</router-link>
-      <btn icon="mdi:person-add" :label="getString('joinButton')" href="/adherer" @click="hideNavMenu" />
-    </li>
+    <ul class="nav-el links-list" v-show="menuToggled || !smallScreen">
+      <li v-for="(label, link) in links" :key="label" :class="{ current: props.currentTab === link }">
+        <router-link :to="link" @click="toggleNavMenu">{{ label }}</router-link>
+      </li>
+    </ul>
+
+    <div class="nav-el buttons" v-show="menuToggled || !smallScreen">
+      <btn icon="mdi:person-add" :label="getString('joinButton')" href="/adherer" @click="toggleNavMenu" />
+    </div>
   </header>
 </template>
 
@@ -57,10 +71,6 @@ header {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   transition: all 0.1s;
 
-  .icon, h1 {
-    display: none;
-  }
-
   &.scrolled {
     background: rgba(255, 255, 255, 0.8);
     height: 90px;
@@ -77,27 +87,41 @@ header {
     transition: all 0.1s;
   }
 
-  li {
+  .nav-el {
     display: flex;
-    list-style-type: none;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .links-list {
+    display: flex;
     gap: 15px;
+    list-style-type: none;
     align-items: center;
     @include title-font;
     font-weight: 600;
     font-size: 18px;
 
-    a:not(.btn) {
-      transition: 0.1s ease-in-out;
+    li {
+      a:not(.btn) {
+        transition: 0.1s ease-in-out;
+      }
 
-      &:hover {
-        color: var(--darker-cta-color);
+      & a:not(.btn):hover, &.current {
+        color: var(--cta-color) !important;
         font-weight: 700;
       }
-    }
 
-    .btn {
-      margin-left: 25px;
+      .btn {
+        margin-left: 25px;
+      }
     }
+  }
+
+  .buttons {
+    display: flex;
+    gap: 15px;
+    margin-left: auto;
   }
 }
 
@@ -110,13 +134,9 @@ header {
 
     &.scrolled {
       height: max-content;
-      img {
-        width: 50px;
-        height: 50px;
-      }
     }
 
-    .left {
+    & .nav-el:first-child {
       justify-content: space-between;
       flex-direction: row;
       display: flex;
@@ -125,12 +145,6 @@ header {
     }
 
     .icon {
-      display: block;
-      font-size: 32px;
-    }
-
-    h1 {
-      display: block;
       font-size: 32px;
     }
 
@@ -139,20 +153,23 @@ header {
       height: 50px;
     }
 
-    li {
+    .links-list {
       flex-direction: column;
       gap: 15px;
       margin: 15px 0;
+      align-self: start;
       align-items: start;
-      width: 100%;
 
-      a {
-        margin-left: 0;
+      li {
+        a.btn {
+          margin-left: 0;
+        }
       }
     }
 
-    li:not(li.show) {
-      display: none;
+    .buttons {
+      margin-left: 0;
+      align-self: start;
     }
   }
 }

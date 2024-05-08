@@ -1,9 +1,17 @@
 <script setup lang="ts">
-const props = defineProps(['label', 'href', 'icon'])
+const props = defineProps({
+  label: String,
+  icon: String,
+  weight: {
+    type: String,
+    default: 'primary'
+  },
+  href: String
+})
 </script>
 
 <template>
-  <a class="btn" :href="props.href"><Icon v-if="icon" :name="icon" /> {{props.label}}</a>
+  <a :class="'btn ' + weight" :href="props.href"><Icon v-if="icon" :name="icon" /> {{props.label}}</a>
 </template>
 
 <style scoped lang="scss">
@@ -27,10 +35,20 @@ a {
     width: 24px;
     height: 24px;
   }
+
+  &:hover {
+    background: var(--darker-cta-color);
+  }
 }
 
-a:hover {
-  background: var(--darker-cta-color);
-  transform: scale(1.01);
+a.secondary {
+  background: var(--surface-background-color);
+  color: var(--main-cta-color);
+  border: 2px solid var(--main-cta-color);
+
+  &:hover {
+    background: var(--main-cta-color);
+    color: #FFF;
+  }
 }
 </style>

@@ -24,6 +24,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <top-bar current-tab="/articles" />
   <section id="article">
     <h1>{{ article.title }}</h1>
 

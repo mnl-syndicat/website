@@ -45,7 +45,6 @@ const filteredFederations = computed(() => {
 onMounted(() => {
   for (const federation of federations) {
     if (federation.active) {
-      console.log(federation.code.toLowerCase());
       document.querySelector('.departement' + federation.code.toLowerCase()).classList.add('active');
 
       document.querySelector('.departement' + federation.code.toLowerCase()).addEventListener('click', () => {
@@ -66,6 +65,7 @@ useHead({
 </script>
 
 <template>
+  <top-bar current-tab="/federations" />
   <section class="federations" >
     <h1>FÉDÉRATIONS</h1>
     <main>

@@ -10,6 +10,7 @@ useHead({
 </script>
 
 <template>
+  <top-bar current-tab="/contact" />
   <section>
     <h1>CONTACT</h1>
     <p>

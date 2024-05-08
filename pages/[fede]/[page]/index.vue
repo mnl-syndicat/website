@@ -31,6 +31,7 @@ onMounted(() => {
 </script>
 
 <template>
+  <top-bar current-tab="/federations" />
   <section id="federation">
     <h1 class="breadcrumb">
       <router-link :to="'/' + federation.code">

@@ -10,6 +10,7 @@ useHead({
 </script>
 
 <template>
+  <top-bar current-tab="/articles" />
   <section>
     <h1>ARTICLES</h1>
     <div class="card-grid">

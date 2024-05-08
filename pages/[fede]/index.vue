@@ -19,6 +19,7 @@ useHead({
 </script>
 
 <template>
+  <top-bar current-tab="/federations" />
   <section id="federation">
     <h1>MNL {{ federation.code }} ({{ federation.name }})</h1>
     <div class="contact-button-list">

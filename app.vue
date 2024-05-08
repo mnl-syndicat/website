@@ -27,7 +27,6 @@ useHead({
 </script>
 
 <template>
-  <top-bar />
   <NuxtPage/>
   <foot />
 </template>

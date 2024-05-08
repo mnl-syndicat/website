@@ -1,4 +1,5 @@
 <template>
+  <top-bar current-tab="/" />
   <index-hero />
   <index-values />
   <index-statistics />

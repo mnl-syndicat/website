@@ -7,6 +7,7 @@ import socials from '../static/socials.json'
 import missions from '../static/missions.json'
 import materiel from '../static/materiel.json'
 import federations from '../static/federations.json'
+import communiques from '../static/communiques.json'
 
 function findPage(id: string) {
     for (const string of strings) {
@@ -70,12 +71,24 @@ export const getArticles = () => {
                 image: article.properties.Image.files[0].file.url,
                 link: article.properties.Lien.rich_text[0].plain_text,
                 date: article.properties.Date.date.start,
+                category: article.properties.Categorie.select.name,
                 id: article.id
             })
         }
     }
 
     return processedArticles;
+}
+
+export const getArticlesCategories = () => {
+    let categories = [];
+    for (const article of getArticles()) {
+        categories.push(article.category);
+    }
+
+    categories.sort((a, b) => { return a.localeCompare(b); });
+
+    return [...new Set(categories)];
 }
 
 export const getPartners = () => {
@@ -156,4 +169,26 @@ export const getFederations = () => {
     });
 
     return processedFederations;
+}
+
+export const getCommuniques = () => {
+    let processedCommuniques = [];
+    communiques.sort((a, b) => {
+        return new Date(b.properties.Date.date.start).getTime() - new Date(a.properties.Date.date.start).getTime();
+    });
+
+    for (const communique of communiques) {
+        if (communique.properties.Publie.checkbox === true && communique.properties.ID.title.length > 0 && communique.properties.Image.files.length > 0 && communique.properties.Lien.rich_text.length > 0 && communique.properties.Date.date.start) {
+            processedCommuniques.push({
+                title: communique.properties.ID.title[0].plain_text,
+                image: communique.properties.Image.files[0].file.url,
+                link: communique.properties.Lien.rich_text[0].plain_text,
+                date: communique.properties.Date.date.start,
+                file: "https://www.notion.so/signed/" + encodeURIComponent(communique.properties.File.files[0].file.url.replace(/\?.*$/, '')) + "?table=block&id=" + communique.id.replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5'),
+                id: communique.id
+            })
+        }
+    }
+
+    return processedCommuniques;
 }

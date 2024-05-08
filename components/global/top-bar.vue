@@ -24,9 +24,9 @@ const toggleNavMenu = () => {
 };
 
 const links = {
-  '/': 'Accueil',
   '/about': 'À Propos',
   '/articles': 'Articles',
+  '/communiques': 'Communiqués',
   '/contact': 'Contact',
   '/federations': 'Fédérations',
   '/materiel': 'Matériel',
@@ -101,6 +101,7 @@ header {
     @include title-font;
     font-weight: 600;
     font-size: 18px;
+    flex: 2;
 
     li {
       a:not(.btn) {

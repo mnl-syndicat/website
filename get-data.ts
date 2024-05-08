@@ -102,6 +102,10 @@ const databases = [
     {
         name: "federations",
         id: "781737202074478f8a28f89709c8a0f8"
+    },
+    {
+        name: "communiques",
+        id: "4b5c34d870474f6592eaddd994b790a9"
     }
 ];
 

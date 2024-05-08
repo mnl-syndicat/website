@@ -1,6 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    modules: ['nuxt-icon', 'nuxt-svgo', '@nuxtjs/google-fonts', "@nuxt/image", "@nuxtjs/sitemap", "@nuxtjs/supabase"],
+    modules: ['nuxt-icon', 'nuxt-svgo', '@nuxtjs/google-fonts', "@nuxt/image", "@nuxtjs/sitemap"],
 
     css: [
         '@/node_modules/normalize.css/normalize.css',

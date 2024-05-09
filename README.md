@@ -1,5 +1,7 @@
 # ✊ Mouvement National Lycéen website
 
+![Vercel Deploy](https://deploy-badge.vercel.app/vercel/website-iota-blue)
+
 ## 📝 Description
 
 This is the repository for the website of the Mouvement National Lycéen. It uses Notion as a CMS for articles but also all website strings and is built with Nuxt.js.

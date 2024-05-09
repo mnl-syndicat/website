@@ -43,15 +43,23 @@ export const getValues = () => {
     return processedValues;
 }
 
+
+export const generateDynamicData = () => {
+    return {
+        federationCount: (getFederations().filter(federation => federation.active)).length,
+    }
+}
+
 export const getStatistics = () => {
     let processedStatistics = [];
+    const dynamicData = generateDynamicData();
     for (const statistic of statistics) {
         if (statistic.properties.ID.title.length > 0 && statistic.properties.Valeur.rich_text.length > 0 && statistic.properties.Image.files.length > 0) {
             if (statistic.properties.Valeur.rich_text[0].plain_text.startsWith("dynamic:")) {
-                const dynamicFuncName = statistic.properties.Valeur.rich_text[0].plain_text.split(":")[1];
+                const dynamicVarName = statistic.properties.Valeur.rich_text[0].plain_text.split(":")[1];
                 processedStatistics.push({
                     title: statistic.properties.ID.title[0].plain_text,
-                    value: eval(dynamicFuncName)(),
+                    value: dynamicData[dynamicVarName],
                     icon: statistic.properties.Image.files[0].file.url
                 })
             } else {
@@ -178,17 +186,6 @@ export const getFederations = () => {
     });
 
     return processedFederations;
-}
-
-export const getFederationCount = () => {
-    let count = 0;
-    for (const federation of federations) {
-        if (federation.properties.Active.checkbox) {
-            count++;
-        }
-    }
-
-    return count;
 }
 
 export const getCommuniques = () => {

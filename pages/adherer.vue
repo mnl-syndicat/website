@@ -13,8 +13,7 @@ useHead({
   <top-bar />
   <section id="adherer">
     <h1>ADHÉRER</h1>
-
-    <iframe src="https://www.helloasso.com/associations/mouvement-national-lyceen/adhesions/adhesion-mnl-2023-2024/widget"></iframe>
+    <iframe :src="getString('adhererLink')"></iframe>
   </section>
 </template>
 

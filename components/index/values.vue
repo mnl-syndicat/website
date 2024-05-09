@@ -5,10 +5,10 @@
 <template>
   <section>
     <div class="container">
-      <h1>{{ getString('valuesCategoryName') }}</h1>
+      <h1>{{ getString('valuesCategoryName') }} <btn icon="mdi:person-add" :label="getString('joinButton')" href="/adherer" @click="toggleNavMenu" /></h1>
       <div class="values">
         <div class="value" v-for="value in getValues()" :key="value.id">
-            <h3 class="title"><img :src="value.icon" alt="icon"/> {{ value.title }}</h3>
+          <h3 class="title"><img :src="value.icon" alt="icon"/> {{ value.title }}</h3>
           <p>{{ value.description }}</p>
         </div>
       </div>
@@ -21,6 +21,13 @@
 section {
   flex-direction: row;
   padding: 50px 5vw;
+
+  h1 {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+  }
 
   #valuesIllus {
     width: 25vw;
@@ -91,6 +98,12 @@ section {
 @media (max-width: 768px) {
   section {
     flex-direction: column;
+
+    h1 {
+      flex-direction: column;
+      gap: 10px;
+      align-items: start;
+    }
 
     .container {
       width: 80vw;

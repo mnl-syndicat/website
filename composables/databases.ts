@@ -190,22 +190,38 @@ export const getFederations = () => {
 
 export const getCommuniques = () => {
     let processedCommuniques = [];
-    communiques.sort((a, b) => {
-        return new Date(b.properties.Date.date.start).getTime() - new Date(a.properties.Date.date.start).getTime();
-    });
 
     for (const communique of communiques) {
-        if (communique.properties.Publie.checkbox === true && communique.properties.ID.title.length > 0 && communique.properties.Image.files.length > 0 && communique.properties.Lien.rich_text.length > 0 && communique.properties.Date.date.start) {
+        if (communique.properties.Publie.checkbox === true && communique.properties.ID.title.length > 0 && communique.properties.Image.files.length > 0 && communique.properties.Lien.rich_text.length > 0 && communique.properties.Date.date) {
+
+            let fileUrl = "";
+            if (communique.properties.File.files.length > 0) {
+                fileUrl =
+                    "https://www.notion.so/signed/" +
+                    encodeURIComponent(
+                        communique.properties.File.files[0].file.url.replace(/\?.*$/, "")
+                    ) +
+                    "?table=block&id=" +
+                    communique.id.replace(
+                        /^(.{8})(.{4})(.{4})(.{4})(.{12})$/,
+                        "$1-$2-$3-$4-$5"
+                    );
+            }
+
             processedCommuniques.push({
                 title: communique.properties.ID.title[0].plain_text,
                 image: communique.properties.Image.files[0].file.url,
                 link: communique.properties.Lien.rich_text[0].plain_text,
                 date: communique.properties.Date.date.start,
-                file: "https://www.notion.so/signed/" + encodeURIComponent(communique.properties.File.files[0].file.url.replace(/\?.*$/, '')) + "?table=block&id=" + communique.id.replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5'),
+                file: fileUrl,
                 id: communique.id
             })
         }
     }
+
+    processedCommuniques.sort((a, b) => {
+        return new Date(b.date).getTime() - new Date(a.date).getTime();
+    });
 
     return processedCommuniques;
 }

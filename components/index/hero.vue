@@ -10,19 +10,22 @@ section {
   background-size: cover;
   background-position: center;
   background-color: var(--main-cta-color);
-  padding: 10vh 20vh;
+  padding: 10vh 5vw;
   gap: 0;
   flex-direction: column;
   color: #FFF;
 
   h1 {
-    font-size: 114px;
+    font-size: 6vw;
     font-weight: 1000;
     margin-bottom: 30px;
+    max-width: 1500px;
   }
 
   h2 {
     font-weight: 900;
+    font-size: 2.5vw;
+    max-width: 1500px;
   }
 }
 

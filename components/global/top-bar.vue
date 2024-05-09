@@ -24,12 +24,26 @@ const toggleNavMenu = () => {
 };
 
 const links = {
-  '/about': 'À Propos',
-  '/articles': 'Articles',
-  '/communiques': 'Communiqués',
-  '/contact': 'Contact',
-  '/federations': 'Fédérations',
-  '/materiel': 'Matériel',
+  '/about': {
+    label: 'À propos',
+    icon: 'mdi:information-outline',
+  },
+  '/articles': {
+    label: 'Articles',
+    icon: 'mdi:newspaper',
+  },
+  '/communiques': {
+    label: 'Communiqués',
+    icon: 'mdi:megaphone',
+  },
+  '/contact': {
+    label: 'Contact',
+    icon: 'mdi:email',
+  },
+  '/federations': {
+    label: 'Fédérations',
+    icon: 'mdi:account-group',
+  },
 };
 </script>
 
@@ -42,8 +56,11 @@ const links = {
     </div>
 
     <ul class="nav-el links-list" v-show="menuToggled || !smallScreen">
-      <li v-for="(label, link) in links" :key="label" :class="{ current: props.currentTab === link }">
-        <router-link :to="link" @click="toggleNavMenu">{{ label }}</router-link>
+      <li v-for="(link, path) in links" :key="path" :class="{ current: path === currentTab }">
+        <router-link :to="path">
+          <Icon :name="link.icon" />
+          {{ link.label }}
+        </router-link>
       </li>
     </ul>
 
@@ -95,7 +112,7 @@ header {
 
   .links-list {
     display: flex;
-    gap: 15px;
+    gap: 20px;
     list-style-type: none;
     align-items: center;
     @include title-font;
@@ -106,10 +123,13 @@ header {
     li {
       a:not(.btn) {
         transition: 0.1s ease-in-out;
+        display: flex;
+        gap: 3px;
+        align-items: center;
       }
 
-      & a:not(.btn):hover, &.current {
-        color: var(--cta-color) !important;
+      & a:not(.btn):hover, &.current a {
+        color: var(--main-cta-color) !important;
         font-weight: 700;
       }
 

@@ -165,7 +165,7 @@ header {
       align-items: center;
     }
 
-    .icon {
+    .icon:not(a .icon) {
       font-size: 32px;
     }
 

@@ -37,4 +37,14 @@ section#adherer {
     background: var(--surface-background-color);
   }
 }
+
+@media (max-width: 768px) {
+  section#adherer {
+    padding: 30px 5vw;
+
+    iframe {
+      width: 90vw;
+    }
+  }
+}
 </style>

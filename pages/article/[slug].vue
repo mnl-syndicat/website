@@ -21,6 +21,17 @@ onMounted(() => {
   });
 })
 
+useHead({
+  title: article.title + 'MNL - ',
+  meta: [
+    { name: 'description', content: "Un article du MNL, premier syndicat lycéen écologiste, antiraciste, antifasciste et révolutionnaire !" },
+    { name: 'og:title', content: article.title },
+    { name: 'og:description', content: "Un article du MNL, premier syndicat lycéen écologiste, antiraciste, antifasciste et révolutionnaire !" },
+    { name: 'og:image', content: article.image },
+    { name: 'og:time', content: article.date },
+  ],
+});
+
 </script>
 
 <template>

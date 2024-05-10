@@ -22,7 +22,7 @@ onMounted(() => {
 })
 
 useHead({
-  title: article.title + 'MNL - ',
+  title: article.title + ' - MNL',
   meta: [
     { name: 'description', content: "Un article du MNL, premier syndicat lycéen écologiste, antiraciste, antifasciste et révolutionnaire !" },
     { name: 'og:title', content: article.title },

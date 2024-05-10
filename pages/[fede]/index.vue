@@ -23,8 +23,8 @@ useHead({
   <section id="federation">
     <h1>MNL {{ federation.code }} ({{ federation.name }})</h1>
     <div class="contact-button-list">
-      <btn :href="'mailto:' + federation.email" icon="mdi:email" :label="federation.email" />
-      <btn v-if="federation.instagram" :href="federation.instagram" icon="mdi:instagram" :label="'@' + federation.instagram.match(/^https?:\/\/(?:www\.)?instagram\.com\/([^/?]+)/i)?.[1] || 'Instagram'" />
+      <btn :href="'mailto:' + federation.email" icon="ph:envelope-simple-bold" :label="federation.email" />
+      <btn v-if="federation.instagram" :href="federation.instagram" icon="ph:instagram-logo-bold" :label="'@' + federation.instagram.match(/^https?:\/\/(?:www\.)?instagram\.com\/([^/?]+)/i)?.[1] || 'Instagram'" />
     </div>
 
     <p class="disclaimer">

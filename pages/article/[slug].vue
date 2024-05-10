@@ -26,7 +26,7 @@ onMounted(() => {
 <template>
   <top-bar current-tab="/articles" />
   <section id="article">
-    <h1><Icon name="mdi:newspaper" /> {{ article.title }}</h1>
+    <h1><Icon name="ph:newspaper-clipping-bold" /> {{ article.title }}</h1>
 
     <NotionRenderer
         :blockMap="blockMap"

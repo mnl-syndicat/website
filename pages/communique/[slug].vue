@@ -15,9 +15,9 @@ const {data: blockMap} = useAsyncData(communique.link, () =>
 <template>
   <top-bar current-tab="/communiques" />
   <section id="article">
-    <h1><Icon name="mdi:megaphone" /> {{ communique.title }}</h1>
+    <h1><Icon name="ph:megaphone-simple-bold" /> {{ communique.title }}</h1>
 
-    <btn icon="mdi:download" :label="'Télécharger le communiqué'" :href="communique.file" v-if="communique.file" />
+    <btn icon="ph:download-bold" :label="'Télécharger le communiqué'" :href="communique.file" v-if="communique.file" />
 
     <NotionRenderer
         :blockMap="blockMap"
@@ -116,7 +116,7 @@ section#article {
     padding-bottom: 0 !important;
   }
 
-  a:not(.btn) {
+  .notion-link {
     color: var(--main-cta-color);
     text-decoration: underline;
   }

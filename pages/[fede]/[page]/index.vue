@@ -35,12 +35,12 @@ onMounted(() => {
   <section id="federation">
     <h1 class="breadcrumb">
       <router-link :to="'/' + federation.code">
-        <Icon name="mdi:home-outline"/>
+        <Icon name="ph:house-bold"/>
         MNL {{ federation.code }}
       </router-link>
       /
       <span>
-        <Icon name="material-symbols:description-outline"/>
+        <Icon name="ph:file-text-bold"/>
       {{ title }}
       </span>
     </h1>

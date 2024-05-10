@@ -128,7 +128,7 @@ section {
     gap: 10px;
     @include main-border;
     background: var(--surface-background-color);
-    padding: 20px;
+    padding: 0  20px 20px;
     height: min-content;
     cursor: pointer;
     @include main-border-radius;
@@ -145,17 +145,18 @@ section {
 
     img {
       height: 200px;
-      width: 100%;
+      width: 348px;
+      border-radius: 2px 2px 0 0;
       object-fit: cover;
       object-position: top;
-      @include main-border-radius;
-      @include main-border;
+      border-bottom: 1px solid var(--main-border-color);
     }
 
     h3 {
       font-size: 25px;
       font-weight: 800;
       width: 100%;
+      margin-top: 10px;
     }
   }
 }

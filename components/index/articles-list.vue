@@ -8,7 +8,7 @@
       <h1>DERNIERS ARTICLES</h1>
       <btn label="VOIR TOUT" href="/articles"></btn>
     </div>
-    <div class="articles">
+    <div class="articles card-grid">
       <article v-for="article in getArticles().slice(0, 5)" :key="article.link">
         <router-link class="card" :to="'/article/' + article.link">
           <NuxtImg height="300" :src="article.image" alt="" />
@@ -38,9 +38,8 @@ section {
     padding: 5px 30px 5px 15vw;
     gap: 40px;
 
-    article a {
+    article .card {
       height: min-content;
-      width: 350px;
 
       &:hover {
         transform: scale(1.01);
@@ -52,9 +51,7 @@ section {
 
       img {
         height: 200px;
-        width: 100%;
         object-fit: cover;
-        border-radius: 3px;
       }
 
       h3 {

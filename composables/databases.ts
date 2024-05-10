@@ -8,6 +8,7 @@ import missions from '../static/missions.json'
 import materiel from '../static/materiel.json'
 import federations from '../static/federations.json'
 import communiques from '../static/communiques.json'
+import en_members from '../static/en_members.json'
 
 function findPage(id: string) {
     for (const string of strings) {
@@ -224,4 +225,24 @@ export const getCommuniques = () => {
     });
 
     return processedCommuniques;
+}
+
+export const getEnMembers = () => {
+    let processedMembers = [];
+    for (const member of en_members) {
+        if (member.properties.Nom.title.length > 0 && member.properties.Image.files.length > 0 && member.properties.Fonction.rich_text.length > 0) {
+            processedMembers.push({
+                name: member.properties.Nom.title[0].plain_text,
+                image: member.properties.Image.files[0].file.url,
+                role: member.properties.Fonction.rich_text[0].plain_text,
+                email: member.properties.Email.email,
+                phone: member.properties.Telephone.phone_number,
+                instagram: member.properties.Instagram.url
+            })
+        }
+    }
+
+    processedMembers.reverse();
+
+    return processedMembers;
 }

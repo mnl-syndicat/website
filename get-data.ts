@@ -106,6 +106,10 @@ const databases = [
     {
         name: "communiques",
         id: "4b5c34d870474f6592eaddd994b790a9"
+    },
+    {
+        name : "en_members",
+        id : "f4fec900df194977bb267da0023d7927"
     }
 ];
 

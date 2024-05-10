@@ -51,7 +51,7 @@ const links = {
   <header :class="{ scrolled }">
     <div class="nav-el">
       <Icon :name="menuToggled ? 'mdi:close' : 'mdi:menu'" v-if="smallScreen" @click="toggleNavMenu()" />
-      <h3 v-if="smallScreen">MNL</h3>
+      <h3 v-if="smallScreen"><router-link to="/">MNL</router-link></h3>
       <router-link to="/"><img :src="getImage('orgLogo')" alt="Organization logo"></router-link>
     </div>
 
@@ -170,8 +170,8 @@ header {
     }
 
     img {
-      width: 50px;
-      height: 50px;
+      width: 50px !important;
+      height: 50px !important;
     }
 
     .links-list {

@@ -11,7 +11,7 @@
 </template>
 
 <style scoped lang="scss">
-.icon-list-el img {
+.icon-list .icon-list-el img {
   width: 70px;
   height: 70px;
 }

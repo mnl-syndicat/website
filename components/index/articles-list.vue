@@ -82,12 +82,11 @@ section {
     margin-left: -5vw;
 
     article a {
-      width: 70vw !important;
-      padding: 15px;
       gap: 10px;
+      width: 275px;
 
       img {
-        height: 150px;
+        width: 273px;
       }
 
       h3 {

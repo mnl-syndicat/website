@@ -11,7 +11,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <a :class="'btn ' + weight" :href="props.href" target="_blank"><Icon v-if="icon" :name="icon" /> {{props.label}}</a>
+  <a :class="'btn ' + weight" :href="props.href"><Icon v-if="icon" :name="icon" /> {{props.label}}</a>
 </template>
 
 <style scoped lang="scss">

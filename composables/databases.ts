@@ -9,6 +9,7 @@ import materiel from '../static/materiel.json'
 import federations from '../static/federations.json'
 import communiques from '../static/communiques.json'
 import en_members from '../static/en_members.json'
+import contacts from '../static/contacts.json'
 
 function findPage(id: string) {
     for (const string of strings) {
@@ -32,11 +33,11 @@ export const getImage = (id: string) => {
 export const getValues = () => {
     let processedValues = [];
     for (const value of values) {
-        if (value.properties.ID.title.length > 0 && value.properties.Description.rich_text.length > 0 && value.properties.Image.files.length > 0) {
+        if (value.properties.ID.title.length > 0 && value.properties.Description.rich_text.length > 0 && value.properties.Icone.rich_text.length > 0) {
             processedValues.push({
                 title: value.properties.ID.title[0].plain_text,
                 description: value.properties.Description.rich_text[0].plain_text,
-                icon: value.properties.Image.files[0].file.url
+                icon: value.properties.Icone.rich_text[0].plain_text
             })
         }
     }
@@ -55,19 +56,19 @@ export const getStatistics = () => {
     let processedStatistics = [];
     const dynamicData = generateDynamicData();
     for (const statistic of statistics) {
-        if (statistic.properties.ID.title.length > 0 && statistic.properties.Valeur.rich_text.length > 0 && statistic.properties.Image.files.length > 0) {
+        if (statistic.properties.ID.title.length > 0 && statistic.properties.Valeur.rich_text.length > 0 && statistic.properties.Icone.rich_text.length > 0) {
             if (statistic.properties.Valeur.rich_text[0].plain_text.startsWith("dynamic:")) {
                 const dynamicVarName = statistic.properties.Valeur.rich_text[0].plain_text.split(":")[1];
                 processedStatistics.push({
                     title: statistic.properties.ID.title[0].plain_text,
                     value: dynamicData[dynamicVarName],
-                    icon: statistic.properties.Image.files[0].file.url
+                    icon: statistic.properties.Icone.rich_text[0].plain_text
                 })
             } else {
                 processedStatistics.push({
                     title: statistic.properties.ID.title[0].plain_text,
                     value: statistic.properties.Valeur.rich_text[0].plain_text,
-                    icon: statistic.properties.Image.files[0].file.url
+                    icon: statistic.properties.Icone.rich_text[0].plain_text
                 })
             }
         }
@@ -127,10 +128,10 @@ export const getPartners = () => {
 export const getSocials = () => {
     let processedSocials = [];
     for (const social of socials) {
-        if (social.properties.ID.title.length > 0 && social.properties.Image.files.length > 0 && social.properties.Link.url) {
+        if (social.properties.ID.title.length > 0 && social.properties.Icone.rich_text.length > 0 && social.properties.Link.url) {
             processedSocials.push({
                 name: social.properties.ID.title[0].plain_text,
-                icon: social.properties.Image.files[0].file.url,
+                icon: social.properties.Icone.rich_text[0].plain_text,
                 link: social.properties.Link.url
             })
         }
@@ -245,4 +246,20 @@ export const getEnMembers = () => {
     processedMembers.reverse();
 
     return processedMembers;
+}
+
+export const getContacts = () => {
+    let processedContacts = [];
+    for (const contact of contacts) {
+        if (contact.properties.ID.title.length > 0 && contact.properties.Icone.rich_text.length > 0 && contact.properties.Email.email) {
+            processedContacts.push({
+                name: contact.properties.ID.title[0].plain_text,
+                icon: contact.properties.Icone.rich_text[0].plain_text,
+                email: contact.properties.Email.email,
+                id: contact.id
+            })
+        }
+    }
+
+    return processedContacts;
 }

@@ -1,7 +1,7 @@
 <template>
   <section class="icon-list">
     <div class="icon-list-el" v-for="stat in getStatistics()">
-      <img :src="stat.icon" alt="">
+      <Icon :name="stat.icon" />
       <h1>{{ stat.value }}</h1>
       <p>{{ stat.title }}</p>
     </div>

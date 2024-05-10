@@ -110,6 +110,10 @@ const databases = [
     {
         name : "en_members",
         id : "f4fec900df194977bb267da0023d7927"
+    },
+    {
+        name : "contacts",
+        id : "24288aed5d4f405f94f27c9027b6a9d3"
     }
 ];
 

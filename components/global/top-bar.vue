@@ -26,23 +26,23 @@ const toggleNavMenu = () => {
 const links = {
   '/about': {
     label: 'À propos',
-    icon: 'mdi:information-outline',
+    icon: 'ph:info-bold',
   },
   '/articles': {
     label: 'Articles',
-    icon: 'mdi:newspaper',
+    icon: 'ph:newspaper-clipping-bold',
   },
   '/communiques': {
     label: 'Communiqués',
-    icon: 'mdi:megaphone',
+    icon: 'ph:megaphone-simple-bold',
   },
   '/contact': {
     label: 'Contact',
-    icon: 'mdi:email',
+    icon: 'ph:envelope-simple-bold',
   },
   '/federations': {
     label: 'Fédérations',
-    icon: 'mdi:account-group',
+    icon: 'ph:map-trifold-bold',
   },
 };
 </script>
@@ -65,7 +65,7 @@ const links = {
     </ul>
 
     <div class="nav-el buttons" v-show="menuToggled || !smallScreen">
-      <btn icon="mdi:person-add" :label="getString('joinButton')" href="/adherer" @click="toggleNavMenu" />
+      <btn icon="ph:user-plus-bold" :label="getString('joinButton')" href="/adherer" @click="toggleNavMenu" />
     </div>
   </header>
 </template>

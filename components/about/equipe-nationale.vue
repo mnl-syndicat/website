@@ -12,9 +12,9 @@
         </div>
         <p>{{ member.role }}</p>
         <div class="socials">
-          <a v-if="member.email" :href="'mailto:' + member.email"><Icon name="mdi:email" /></a>
-          <a v-if="member.phone" :href="'tel:' + member.phone"><Icon name="mdi:phone" /></a>
-          <a v-if="member.instagram" :href="member.instagram" target="_blank"><Icon name="mdi:instagram" /></a>
+          <a v-if="member.email" :href="'mailto:' + member.email"><Icon name="ph:envelope-bold" /></a>
+          <a v-if="member.phone" :href="'tel:' + member.phone"><Icon name="ph:phone-bold" /></a>
+          <a v-if="member.instagram" :href="member.instagram" target="_blank"><Icon name="ph:instagram-logo-bold" /></a>
         </div>
       </div>
     </div>

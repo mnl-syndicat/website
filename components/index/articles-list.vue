@@ -37,6 +37,7 @@ section {
     width: 100vw;
     padding: 5px 30px 5px 15vw;
     gap: 40px;
+    flex-wrap: nowrap;
 
     article .card {
       height: min-content;

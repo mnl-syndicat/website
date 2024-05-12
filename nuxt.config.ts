@@ -16,6 +16,18 @@ export default defineNuxtConfig({
         },
     },
 
+    extends: [
+        'nuxt-umami'
+    ],
+
+    appConfig: {
+      umami: {
+          host: "https://analytics.mnl-syndicat.fr",
+          id: "6aef2e5f-372b-4ec1-a4f4-dea20bf083af",
+          ignoreLocalhost: true,
+      }
+    },
+
     css: [
         '@/node_modules/normalize.css/normalize.css',
         '@/static/scss/base.scss',

@@ -29,7 +29,6 @@ useHead({
 <template>
   <NuxtPage/>
   <foot />
-  <script defer src="https://analytics.mnl-syndicat.fr/script.js" data-website-id="6aef2e5f-372b-4ec1-a4f4-dea20bf083af"></script>
 </template>
 
 <style scoped lang="scss">

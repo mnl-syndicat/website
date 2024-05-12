@@ -4893,6 +4893,11 @@ nuxt-svgo@^4.0.0:
     mini-svg-data-uri "^1.4.4"
     svgo "^3.0.2"
 
+nuxt-umami@^2.6.1:
+  version "2.6.1"
+  resolved "https://registry.yarnpkg.com/nuxt-umami/-/nuxt-umami-2.6.1.tgz#7d620ece79bbb5609a7eb5a483f87e29f312b19b"
+  integrity sha512-/dZd5ImGoLhzGPbuXkS7bffJX1AnofvjPQhNYIOfvqeKeT8/n9l7mE8TbA8h/QeuJbC+cfV01AI0dwnnKKXd/w==
+
 nuxt@^3.11.1:
   version "3.11.2"
   resolved "https://registry.yarnpkg.com/nuxt/-/nuxt-3.11.2.tgz#38e14b96ff5669b1fbae7fc99e8d79042dce658d"

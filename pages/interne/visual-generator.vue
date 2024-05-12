@@ -79,7 +79,7 @@ const downloadImage = async () => {
   link.download = 'image.png'
   link.href = canvas.toDataURL()
   link.click()
-  noiseImageRef.value.attributes['href'].value = '/images/noise.png'
+  noiseImageRef.value.attributes['href'].value = '/public/images/noise.png'
   loading.value = false
 }
 </script>
@@ -117,7 +117,7 @@ const downloadImage = async () => {
                    ref="backgroundImageRef"/>
           </pattern>
           <pattern id="pattern1" patternUnits="userSpaceOnUse" width="100%" height="100%">
-            <image href="/images/noise.png" width="4096" height="4096"
+            <image href="/public/images/noise.png" width="4096" height="4096"
                    ref="noiseImageRef"/>
           </pattern>
         </defs>

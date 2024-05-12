@@ -10,17 +10,15 @@ useHead({
 </script>
 
 <template>
-  <top-bar current-tab="/materiel" />
+  <top-bar current-tab="/interne/materiel" :internal="true"/>
   <section class="materiel">
     <h1>MATÉRIEL MILITANT</h1>
 
     <div class="card-grid">
-      <div class="card" v-for="materiel of getMateriel()">
-        <a :href="materiel.file">
-          <img :src="materiel.image" alt="">
-          <h3>{{ materiel.title }}</h3>
-        </a>
-      </div>
+      <a class="card" v-for="materiel of getMateriel()" :href="materiel.file" target="_blank" >
+        <img :src="materiel.image" alt="">
+        <h3>{{ materiel.title }}</h3>
+      </a>
     </div>
   </section>
 </template>

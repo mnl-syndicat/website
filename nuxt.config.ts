@@ -1,6 +1,20 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-    modules: ['nuxt-icon', 'nuxt-svgo', '@nuxtjs/google-fonts', "@nuxt/image", "@nuxtjs/sitemap"],
+    modules: [
+        'nuxt-icon',
+        'nuxt-svgo',
+        '@nuxtjs/google-fonts',
+        "@nuxt/image",
+        "@nuxtjs/sitemap",
+        "@nuxtjs/supabase"
+    ],
+
+    supabase: {
+        redirectOptions: {
+            include: ['/interne(/*)?'],
+            login: '/auth/login',
+        },
+    },
 
     css: [
         '@/node_modules/normalize.css/normalize.css',

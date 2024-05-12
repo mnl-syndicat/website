@@ -15,14 +15,17 @@
     "@nuxt/image": "^1.7.0",
     "@nuxtjs/sitemap": "^5.1.5",
     "@nuxtjs/supabase": "^1.2.2",
+    "canvg": "^4.0.2",
     "dotenv": "^16.4.5",
     "nuxt": "^3.11.1",
+    "p5": "^1.9.3",
     "sass": "^1.75.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
   "devDependencies": {
     "@nuxtjs/google-fonts": "^3.2.0",
+    "@types/p5": "^1.7.6",
     "normalize.css": "^8.0.1",
     "nuxt-icon": "^0.6.10",
     "nuxt-svgo": "^4.0.0",

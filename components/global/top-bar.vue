@@ -1,11 +1,18 @@
 <script setup lang="ts">
 const props = defineProps({
   currentTab: String,
+  internal: {
+    type: Boolean,
+    default: false,
+  },
 });
+
+const user = useSupabaseUser()
 
 const scrolled = ref(false);
 const menuToggled = ref(false);
 const smallScreen = ref(false);
+const links = ref([{label: 'Accueil', icon: 'ph:house-bold', path: '/'}]);
 
 const handleScroll = () => {
   scrolled.value = window.scrollY > 50;
@@ -23,49 +30,81 @@ const toggleNavMenu = () => {
   menuToggled.value = !menuToggled.value;
 };
 
-const links = {
-  '/about': {
-    label: 'À propos',
-    icon: 'ph:info-bold',
-  },
-  '/articles': {
-    label: 'Articles',
-    icon: 'ph:newspaper-clipping-bold',
-  },
-  '/communiques': {
-    label: 'Communiqués',
-    icon: 'ph:megaphone-simple-bold',
-  },
-  '/contact': {
-    label: 'Contact',
-    icon: 'ph:envelope-simple-bold',
-  },
-  '/federations': {
-    label: 'Fédérations',
-    icon: 'ph:map-trifold-bold',
-  },
-};
+if (props.internal) {
+  links.value = [
+    {
+      label: 'Accueil',
+      icon: 'ph:house-bold',
+      path: '/interne',
+    },
+    {
+      label: 'Profil',
+      icon: 'ph:user-bold',
+      path: '/interne/profile',
+    },
+    {
+      label: 'Matériel militant',
+      icon: 'ph:sticker-bold',
+      path: '/interne/materiel',
+    },
+  ]
+
+} else {
+  links.value = [
+    {
+      label: 'À propos',
+      icon: 'ph:info-bold',
+      path: '/about',
+    },
+    {
+      label: 'Articles',
+      icon: 'ph:newspaper-clipping-bold',
+      path: '/articles',
+    },
+    {
+      label: 'Communiqués',
+      icon: 'ph:megaphone-simple-bold',
+      path: '/communiques',
+    },
+    {
+      label: 'Contact',
+      icon: 'ph:envelope-simple-bold',
+      path: '/contact',
+    },
+    {
+      label: 'Fédérations',
+      icon: 'ph:map-trifold-bold',
+      path: '/federations',
+    },
+  ];
+}
 </script>
 
 <template>
   <header :class="{ scrolled }">
     <div class="nav-el">
-      <Icon :name="menuToggled ? 'mdi:close' : 'mdi:menu'" v-if="smallScreen" @click="toggleNavMenu()" />
-      <h3 v-if="smallScreen"><router-link to="/">MNL</router-link></h3>
+      <Icon :name="menuToggled ? 'mdi:close' : 'mdi:menu'" v-if="smallScreen" @click="toggleNavMenu()"/>
+      <h3 v-if="smallScreen">
+        <router-link :to="internal ? '/interne' : '/' ">{{ internal ? "INTERNE" : "MNL" }}</router-link>
+      </h3>
       <router-link to="/"><img :src="getImage('orgLogo')" alt="Organization logo"></router-link>
     </div>
 
     <ul class="nav-el links-list" v-show="menuToggled || !smallScreen">
-      <li v-for="(link, path) in links" :key="path" :class="{ current: path === currentTab }">
-        <router-link :to="path">
-          <Icon :name="link.icon" />
+      <li v-for="link in links" :key="link.label" :class="{ current: currentTab === link.path }">
+        <router-link :to="link.path">
+          <Icon :name="link.icon"/>
           {{ link.label }}
         </router-link>
       </li>
     </ul>
 
     <div class="nav-el buttons" v-show="menuToggled || !smallScreen">
-      <btn icon="ph:user-plus-bold" :label="getString('joinButton')" href="/adherer" @click="toggleNavMenu" />
+      <btn icon="ph:key-bold" label="Espace adhérent·e" href="/interne" @click="toggleNavMenu" weight="secondary"
+           v-if="!internal"/>
+      <btn icon="ph:house-bold" label="Site public" href="/" @click="toggleNavMenu" weight="secondary" v-if="internal"/>
+      <btn icon="ph:user-plus-bold" :label="getString('joinButton')" href="/adherer" @click="toggleNavMenu"
+           v-if="!user"/>
     </div>
   </header>
 </template>
@@ -124,7 +163,7 @@ header {
       a:not(.btn) {
         transition: 0.1s ease-in-out;
         display: flex;
-        gap: 3px;
+        gap: 5px;
         align-items: center;
       }
 
@@ -143,6 +182,23 @@ header {
     display: flex;
     gap: 15px;
     margin-left: auto;
+
+    .profile-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: var(--main-cta-color);
+      color: white;
+      font-size: 28px;
+      transition: 0.1s ease-in-out;
+
+      &:hover {
+        background: var(--main-cta-hover-color);
+      }
+    }
   }
 }
 

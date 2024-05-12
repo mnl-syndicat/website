@@ -161,6 +161,58 @@ section {
   }
 }
 
+label {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--main-text-color);
+}
+
+input:not(.input-with-icon input), .input-with-icon {
+  padding: 15px;
+  @include main-border;
+  border-radius: 3px;
+  margin-bottom: 15px;
+  width: 100%;
+  background: var(--surface-background-color);
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 400px;
+
+  .input-with-icon {
+    display: flex;
+    align-items: center;
+
+    input {
+      border: none;
+      background: none;
+      width: calc(100% - 20px);
+      height: 100%;
+    }
+
+    .icon {
+      cursor: pointer;
+    }
+  }
+
+  .btn {
+    justify-content: center;
+    color: #FFF;
+  }
+
+  a:not(.btn) {
+    color: var(--main-cta-color);
+    text-decoration: underline;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+}
 
 @media (max-width: 768px) {
   section {

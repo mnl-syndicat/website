@@ -174,7 +174,7 @@ input:not(.input-with-icon input), .input-with-icon {
   padding: 15px;
   @include main-border;
   border-radius: 3px;
-  margin-bottom: 15px;
+  margin-bottom: 10px;
   width: 100%;
   background: var(--surface-background-color);
 }
@@ -182,8 +182,12 @@ input:not(.input-with-icon input), .input-with-icon {
 .authForm {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 10px;
   width: 400px;
+
+  p {
+    margin-bottom: 15px;
+  }
 
   .input-with-icon {
     display: flex;
@@ -257,5 +261,9 @@ input:not(.input-with-icon input), .input-with-icon {
         width: calc(100% + 40px);
       }
     }
+  }
+
+  .authForm {
+    width: 90vw;
   }
 }

@@ -78,6 +78,7 @@ section#article {
     margin: 15px 0;
     display: flex;
     gap: 10px;
+    cursor: pointer;
 
     div * {
       font-size: 18px;

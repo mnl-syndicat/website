@@ -127,6 +127,7 @@ useHead({
       font-weight: 600;
       width: 100%;
       outline: none;
+      padding: 0 !important;
     }
 
     .icon {

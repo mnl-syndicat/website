@@ -13,13 +13,16 @@ onMounted(async () => {
 });
 
 const saveProfile = async () => {
-  const {data, error} = await supabase.from('memberships').update({
-    first_name: userData.first_name,
-    last_name: userData.last_name,
-    date_of_birth: userData.date_of_birth,
-    phone_number: userData.phone_number,
-    school: userData.school,
-  }).eq('id', user.value?.id)
+  const {data, error} = await supabase
+      .from('memberships')
+      .update({
+        first_name: userData.value.first_name,
+        last_name: userData.value.last_name,
+        date_of_birth: userData.value.date_of_birth,
+        phone_number: userData.value.phone_number,
+        school: userData.value.school,
+      })
+      .eq('id', user.value?.id)
   if (error) {
     console.error(error)
   } else {

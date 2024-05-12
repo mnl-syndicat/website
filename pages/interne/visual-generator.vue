@@ -3,9 +3,8 @@ const backgroundImageRef = ref(null)
 const imageUploadRef = ref(null)
 const svgRef = ref(null)
 const noiseImageRef = ref(null)
-const noisePatternRef = ref(null)
-const brightness = ref(80)
-const contrast = ref(200)
+const brightness = ref(115)
+const contrast = ref(134)
 const loading = ref(false)
 
 const updateCanvas = async () => {
@@ -24,23 +23,9 @@ const updateCanvas = async () => {
       svgRef.value.viewBox.baseVal.width = image.width
       svgRef.value.viewBox.baseVal.height = image.height
 
-      const canvas = document.querySelector('canvas')
-      canvas.width = svgRef.value.width.baseVal.value
-      canvas.height = svgRef.value.height.baseVal.value
-      const noiseImage = new Image()
-
-      const data = new XMLSerializer().serializeToString(svgRef.value)
-      const win = window.URL || window.webkitURL || window
-      const img = new Image();
-      const blob = new Blob([data], {type: 'image/svg+xml'})
-      const url = win.createObjectURL(blob)
-      img.src = url
-
-      img.onload = () => {
-        const ctx = canvas.getContext('2d')
-        ctx.drawImage(img, 0, 0);
-        win.revokeObjectURL(url);
-      }
+      const max = Math.max(image.width, image.height)
+      noiseImageRef.value.width.baseVal.value = max
+      noiseImageRef.value.height.baseVal.value = max
     }
   }
 }
@@ -57,12 +42,44 @@ watch([brightness, contrast], async () => {
 
 const downloadImage = async () => {
   loading.value = true
-  await new Promise(resolve => setTimeout(resolve, 3000))
+  const noiseImage = new Image();
+  const max = Math.max(svgRef.value.width.baseVal.value, svgRef.value.height.baseVal.value)
+  noiseImage.src = '/images/noise.png'
+  noiseImage.onload = () => {
+    const canvas = document.createElement('canvas')
+    canvas.width = max
+    canvas.height = max
+    const ctx = canvas.getContext('2d')
+    ctx.drawImage(noiseImage, 0, 0, max, max)
+    noiseImageRef.value.attributes['href'].value = canvas.toDataURL()
+  }
+
+  await new Promise(resolve => setTimeout(resolve, 1000))
+
   const canvas = document.querySelector('canvas')
+  canvas.width = svgRef.value.width.baseVal.value
+  canvas.height = svgRef.value.height.baseVal.value
+
+  const data = new XMLSerializer().serializeToString(svgRef.value)
+  const win = window.URL || window.webkitURL || window
+  const img = new Image();
+  const blob = new Blob([data], {type: 'image/svg+xml'})
+  const url = win.createObjectURL(blob)
+  img.src = url
+
+  img.onload = () => {
+    const ctx = canvas.getContext('2d')
+    ctx.drawImage(img, 0, 0);
+    win.revokeObjectURL(url);
+  }
+
+  await new Promise(resolve => setTimeout(resolve, 5000))
+
   const link = document.createElement('a')
   link.download = 'image.png'
   link.href = canvas.toDataURL()
   link.click()
+  noiseImageRef.value.attributes['href'].value = '/images/noise.png'
   loading.value = false
 }
 </script>
@@ -99,20 +116,16 @@ const downloadImage = async () => {
             <image href="" width="100%" height="100%"
                    ref="backgroundImageRef"/>
           </pattern>
+          <pattern id="pattern1" patternUnits="userSpaceOnUse" width="100%" height="100%">
+            <image href="/images/noise.png" width="4096" height="4096"
+                   ref="noiseImageRef"/>
+          </pattern>
         </defs>
-        <filter id='noiseFilter'>
-          <feTurbulence
-              type='fractalNoise'
-              baseFrequency='0.84'
-              numOctaves='3'
-              stitchTiles='stitch'/>
-        </filter>
         <rect width="100%" height="100%" fill="url(#pattern0)"
-              :style="'filter: grayscale(100%) contrast(' + contrast + '%) brightness(' + brightness + '%)'"/>
-        <rect width="100%" height="100%" fill="#5A2783" fill-opacity="0.3" style="mix-blend-mode: overlay"/>
+              :style="'filter: saturate(0%) contrast(' + contrast + '%) brightness(' + brightness + '%)'"/>
         <rect width="100%" height="100%" fill="#5A2783" fill-opacity="0.3"/>
-        <rect width="100%" height="100%" fill="#000000" filter="url(#noiseFilter)"
-              style="mix-blend-mode: overlay"/>
+        <rect width="100%" height="100%" fill="#5A2783" fill-opacity="0.2" style="mix-blend-mode: overlay"/>
+        <rect width="100%" height="100%" fill="url(#pattern1)" fill-opacity="0.8" style="mix-blend-mode: overlay"/>
       </svg>
     </div>
   </section>

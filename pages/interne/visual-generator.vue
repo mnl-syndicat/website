@@ -96,7 +96,7 @@ const downloadImage = async () => {
       <svg width="500" height="500" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg" ref="svgRef">
         <defs>
           <pattern id="pattern0" patternUnits="userSpaceOnUse" width="100%" height="100%">
-            <image href="/images/noise.png" width="100%" height="100%"
+            <image href="" width="100%" height="100%"
                    ref="backgroundImageRef"/>
           </pattern>
         </defs>

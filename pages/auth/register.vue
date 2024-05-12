@@ -83,8 +83,10 @@ const confirmEmail = async () => {
   <section>
     <h1>Créer votre compte</h1>
     <div class="authForm">
+      <p>
+        Cet espace est réservé aux adhérents du MNL. Pour créer votre compte, utilisez l'email que vous avez fourni lors de votre adhésion. Pour toute question, contactez-nous à <a href="mailto:informatique@mnl-syndicat.fr">informatique@mnl-syndicat.fr</a>.
+      </p>
       <modal v-if="openModal" :type="modalType" :message="modalMessage" @close="openModal = false" />
-
       <label for="pseudo" >
         <Icon name="ph:user-bold"/>
         Pseudo</label>

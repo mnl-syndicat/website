@@ -6,8 +6,7 @@ export default defineNuxtConfig({
         '@nuxtjs/google-fonts',
         "@nuxt/image",
         "@nuxtjs/sitemap",
-        "@nuxtjs/supabase",
-        "@nuxtjs/plausible"
+        "@nuxtjs/supabase"
     ],
 
     supabase: {
@@ -15,12 +14,6 @@ export default defineNuxtConfig({
             include: ['/interne(/*)?'],
             login: '/auth/login',
         },
-    },
-
-    plausible: {
-        ignoredHostnames: ['localhost'],
-        apiHost: "https://analytics.mnl-syndicat.fr",
-        domain: "mnl-syndicat.fr",
     },
 
     css: [

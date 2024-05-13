@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const user = useSupabaseUser()
 
-const links = [
+let links = [
   {
     label: 'Accueil',
     icon: 'ph:house-bold',
@@ -32,6 +32,11 @@ const links = [
     icon: 'ph:paint-brush-bold',
     path: '/interne/visual-generator',
   },
+  {
+    label: 'Gestionnaire de mots de passe',
+    icon: 'ph:lock-bold',
+    path: 'https://mdp.mnl-syndicat.fr',
+  }
 ]
 </script>
 
@@ -52,11 +57,16 @@ const links = [
 <style scoped lang="scss">
 .card-grid {
   justify-content: center;
+
+  gap: 15px;
+  width: 750px;
 }
 
 @media (max-width: 768px) {
   .card-grid {
     gap: 10px;
+    width: 100%;
+
     .btn {
       width: 100%;
     }

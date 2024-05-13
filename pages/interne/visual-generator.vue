@@ -44,7 +44,7 @@ const downloadImage = async () => {
   loading.value = true
   const noiseImage = new Image();
   const max = Math.max(svgRef.value.width.baseVal.value, svgRef.value.height.baseVal.value)
-  noiseImage.src = '/images/noise.png'
+  noiseImage.src = '/noise.png'
   noiseImage.onload = () => {
     const canvas = document.createElement('canvas')
     canvas.width = max
@@ -54,7 +54,7 @@ const downloadImage = async () => {
     noiseImageRef.value.attributes['href'].value = canvas.toDataURL()
   }
 
-  await new Promise(resolve => setTimeout(resolve, 1000))
+  await new Promise(resolve => setTimeout(resolve, 5000))
 
   const canvas = document.querySelector('canvas')
   canvas.width = svgRef.value.width.baseVal.value
@@ -158,6 +158,7 @@ const downloadImage = async () => {
     max-width: 40%;
     width: max-content;
     height: max-content;
+    border-radius: 3px;
   }
 }
 

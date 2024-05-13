@@ -25,6 +25,7 @@ export default defineNuxtConfig({
           host: "https://analytics.mnl-syndicat.fr",
           id: "6aef2e5f-372b-4ec1-a4f4-dea20bf083af",
           ignoreLocalhost: true,
+          version: 2
       }
     },
 

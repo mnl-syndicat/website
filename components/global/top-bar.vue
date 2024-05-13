@@ -84,10 +84,11 @@ if (props.internal) {
   <header :class="{ scrolled }">
     <div class="nav-el">
       <Icon :name="menuToggled ? 'mdi:close' : 'mdi:menu'" v-if="smallScreen" @click="toggleNavMenu()"/>
-      <h3 v-if="smallScreen">
+      <h3 v-if="!(smallScreen && !internal)">
         <router-link :to="internal ? '/interne' : '/' ">{{ internal ? "INTERNE" : "MNL" }}</router-link>
       </h3>
       <router-link to="/"><img :src="getImage('orgLogo')" alt="Organization logo"></router-link>
+      <router-link to="/interne" v-if="!(smallScreen && internal)" class="userIcon"><Icon name="ph:user-circle-bold" /></router-link>
     </div>
 
     <ul class="nav-el links-list" v-show="menuToggled || !smallScreen">
@@ -147,6 +148,11 @@ header {
     display: flex;
     justify-content: center;
     flex: 1;
+
+    .userIcon {
+      color: var(--main-cta-color);
+      font-size: 32px;
+    }
   }
 
   .links-list {

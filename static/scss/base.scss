@@ -170,7 +170,7 @@ label {
   color: var(--main-text-color);
 }
 
-input:not(.input-with-icon input), .input-with-icon {
+input:not(.input-with-icon input), .input-with-icon, select {
   padding: 15px;
   @include main-border;
   border-radius: 3px;

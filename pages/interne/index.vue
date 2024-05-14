@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const user = useSupabaseUser()
+const supabase = useSupabaseClient()
 
 let links = [
   {
@@ -32,12 +33,22 @@ let links = [
     icon: 'ph:paint-brush-bold',
     path: '/interne/visual-generator',
   },
-  {
+]
+
+const {data, error} = await supabase.from('memberships').select(`
+    scopes (id, name)
+  `).eq('id', user.value.id)
+
+
+if (error) {
+  console.error(error)
+} else if (data[0].scopes.some(scope => scope.name === 'Équipe Nationale')) {
+  links.push({
     label: 'Gestionnaire de mots de passe',
     icon: 'ph:lock-bold',
     path: 'https://mdp.mnl-syndicat.fr',
-  }
-]
+  })
+}
 </script>
 
 <template>
@@ -49,7 +60,7 @@ let links = [
     </p>
 
     <div class="card-grid">
-      <btn :label="link.label" :icon="link.icon" :href="link.path" v-for="link in links.slice(1)" weight="secondary" />
+      <btn :label="link.label" :icon="link.icon" :href="link.path" v-for="link in links.slice(1)" weight="secondary"/>
     </div>
   </section>
 </template>
@@ -57,9 +68,8 @@ let links = [
 <style scoped lang="scss">
 .card-grid {
   justify-content: center;
-
   gap: 15px;
-  width: 750px;
+  width: 700px;
 }
 
 @media (max-width: 768px) {

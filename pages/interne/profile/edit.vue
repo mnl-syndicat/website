@@ -2,17 +2,35 @@
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
 const userData = ref({})
+const federations = ref([])
 
 onMounted(async () => {
-  const {data, error} = await supabase.from('memberships').select('*').eq('id', user.value?.id)
+  const {data, error} = await supabase.from('memberships').select(`
+    id,
+    date_of_birth,
+    first_name,
+    last_name,
+    phone_number,
+    school,
+    scopes (id, name)
+  `).eq('id', user.value?.id)
   if (error) {
     console.error(error)
   } else {
     userData.value = data[0]
   }
+
+  const federationsSupabaseData = await supabase.from('scopes').select(`
+    id,
+    name
+  `).eq('type', "Département")
+
+  federations.value = federationsSupabaseData.data?.sort((a, b) => a.name.localeCompare(b.name))
 });
 
 const saveProfile = async () => {
+  const newFederationId = federations.value.find(federation => federation.name === userData.value.scopes[0].name).id
+
   const {data, error} = await supabase
       .from('memberships')
       .update({
@@ -23,6 +41,14 @@ const saveProfile = async () => {
         school: userData.value.school,
       })
       .eq('id', user.value?.id)
+
+  const {data: scopesData, error: scopesError} = await supabase
+      .from('users_scopes')
+      .update({
+        scope_id: newFederationId
+      })
+      .eq('user_id', user.value?.id).eq('scope_id', userData.value.scopes[0].id)
+
   if (error) {
     console.error(error)
   } else {
@@ -48,6 +74,10 @@ const saveProfile = async () => {
       <input type="tel" id="phone_number" v-model="userData.phone_number">
       <label for="school"><Icon name="ph:graduation-cap-bold" /> École:</label>
       <input type="text" id="school" v-model="userData.school">
+      <label for="federation"><Icon name="ph:map-pin-bold"/> Fédération :</label>
+      <select id="federation" v-if="userData.scopes && userData.scopes.length > 0" v-model="userData.scopes[0].name">
+        <option v-for="federation in federations" :key="federation.id" :value="federation.name">{{ federation.name }}</option>
+      </select>
 
       <btn label="Sauvegarder" icon="ph:floppy-disk-bold" @click="saveProfile"/>
     </div>

@@ -83,42 +83,6 @@ onMounted(() => {
       paint-order: stroke;
     }
   }
-
-  .notion {
-    padding: 0 10vw;
-    margin-top: 30px;
-
-    li, ol {
-      margin-left: 20px;
-      word-break: break-word;
-      margin-top: 5px;
-    }
-
-    h1 {
-      font-size: 42px;
-      font-weight: 900;
-      margin: 30px 0;
-    }
-
-    h2 {
-      font-size: 32px;
-      font-weight: 800;
-      margin: 30px 0;
-    }
-
-    .notion-page-link {
-      display: flex;
-      gap: 10px;
-      font-size: 20px;
-      font-weight: 600;
-      padding: 15px 20px;
-      border-radius: 3px;
-      background: var(--surface-background-color);
-      @include main-border;
-      width: max-content;
-      margin: 20px 0;
-    }
-  }
 }
 
 @media (max-width: 768px) {

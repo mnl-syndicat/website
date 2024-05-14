@@ -19,6 +19,11 @@ let links = [
     path: '/interne/materiel',
   },
   {
+    label: 'Discussion & Pôles',
+    icon: 'ph:chat-circle-bold',
+    path: '/interne/channels',
+  },
+  {
     label: 'Espace fédération',
     icon: 'ph:users-bold',
     path: 'https://interne.mnl-syndicat.fr',
@@ -44,7 +49,7 @@ if (error) {
   console.error(error)
 } else if (data[0].scopes.some(scope => scope.name === 'Équipe Nationale')) {
   links.push({
-    label: 'Gestionnaire de mots de passe',
+    label: 'Mots de passe',
     icon: 'ph:lock-bold',
     path: 'https://mdp.mnl-syndicat.fr',
   })

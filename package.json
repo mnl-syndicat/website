@@ -15,7 +15,6 @@
     "@nuxt/image": "^1.7.0",
     "@nuxtjs/sitemap": "^5.1.5",
     "@nuxtjs/supabase": "^1.2.2",
-    "canvg": "^4.0.2",
     "dotenv": "^16.4.5",
     "nuxt": "^3.11.1",
     "nuxt-umami": "^2.6.1",

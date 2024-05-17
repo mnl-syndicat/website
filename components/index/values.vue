@@ -1,9 +1,9 @@
 <template>
   <section>
     <div class="container">
-      <h1>{{ getString('valuesCategoryName') }} <btn icon="ph:user-plus-bold" :label="getString('joinButton')" href="/adherer" @click="toggleNavMenu" /></h1>
+      <h1>{{ getString('valuesCategoryName') }} <btn icon="ph:user-plus-bold" :label="getString('joinButton')" href="/adherer" /></h1>
       <div class="values">
-        <div class="value" v-for="value in getValues()" :key="value.id">
+        <div class="value" v-for="value in getValues()">
           <h3 class="title"><Icon :name="value.icon" /> {{ value.title }}</h3>
           <p>{{ value.description }}</p>
         </div>

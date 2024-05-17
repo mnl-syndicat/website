@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 useHead({
   title: 'MNL — Contact',
   meta: [

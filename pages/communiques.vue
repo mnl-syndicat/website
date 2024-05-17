@@ -1,7 +1,3 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
   <top-bar current-tab="/communiques"/>
   <section class="communiques">
@@ -15,7 +11,3 @@
     </div>
   </section>
 </template>
-
-<style scoped lang="scss">
-
-</style>

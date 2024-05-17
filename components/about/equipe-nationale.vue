@@ -5,7 +5,7 @@
       <p>{{ getString('enValue') }}</p>
     </div>
     <div class="members">
-      <div class="member" v-for="member in getEnMembers()" :key="member.id">
+      <div class="member" v-for="member in getEnMembers()">
         <div class="title">
           <img :src="member.image" :alt="member.name" />
           <h3>{{ member.name }}</h3>

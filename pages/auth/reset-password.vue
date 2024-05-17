@@ -1,9 +1,8 @@
 <script setup lang="ts">
 const supabase = useSupabaseClient()
-const user = useSupabaseUser()
 const email = ref('')
 const modalMessage = ref('')
-const modalType = ref('')
+const modalType = ref<'error' | 'information'>('error')
 const openModal = ref(false)
 
 const resetPassword = async () => {

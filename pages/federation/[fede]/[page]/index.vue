@@ -3,7 +3,7 @@ const route = useRoute()
 const {$notion} = useNuxtApp();
 const fedeCode = route.params.fede;
 const pageId = route.params.page;
-const federation = getFederations().find(federation => federation.code === fedeCode);
+const federation = getFederations().find(federation => federation.code === fedeCode)!;
 const title = ref('');
 
 const {data: blockMap} = useAsyncData(federation.notionId, () =>
@@ -14,10 +14,12 @@ const {data: blockMap} = useAsyncData(federation.notionId, () =>
 onMounted(() => {
   const links = document.querySelectorAll('.notion-page-link');
   links.forEach(link => {
-    link.setAttribute('href', '/' + fedeCode + link.getAttribute('href'));
+    link.setAttribute('href', '/federation/' + fedeCode + link.getAttribute('href'));
   });
 
-  title.value = Object.values(Object.values(blockMap)[3])[0].value.properties.title[0][0];
+  console.log(
+
+  title.value = Object.values(toRaw(blockMap.value) as Object)[0].value.properties.title[0][0]);
 
   useHead({
     title: `MNL ${federation.code} — ${title.value}`,
@@ -34,7 +36,7 @@ onMounted(() => {
   <top-bar current-tab="/federations" />
   <section id="federation">
     <h1 class="breadcrumb">
-      <router-link :to="'/' + federation.code">
+      <router-link :to="'/federation/' + federation.code">
         <Icon name="ph:house-bold"/>
         MNL {{ federation.code }}
       </router-link>

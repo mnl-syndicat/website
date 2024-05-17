@@ -1,12 +1,11 @@
 <script setup lang="ts">
 const supabase = useSupabaseClient()
-const user = useSupabaseUser()
 const pseudo = ref('')
 const email = ref('')
 const password = ref('')
 const showPassword = ref(false)
 const modalMessage = ref('')
-const modalType = ref('')
+const modalType = ref<'error' | 'information'>('error')
 const openModal = ref(false)
 const loading = ref(false)
 const emailOtp = ref('')
@@ -73,6 +72,13 @@ const confirmEmail = async () => {
     token: emailOtp.value,
     type: "email"
   })
+
+  if (error) {
+    modalMessage.value = error.message
+    modalType.value = "error"
+    openModal.value = true
+    return
+  }
 
   navigateTo("/interne")
 }

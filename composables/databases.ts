@@ -1,15 +1,15 @@
-import strings from '../static/strings.json'
-import values from '../static/values.json'
-import statistics from '../static/statistics.json'
-import articles from '../static/articles.json'
-import partners from '../static/partners.json'
-import socials from '../static/socials.json'
-import missions from '../static/missions.json'
-import materiel from '../static/materiel.json'
-import federations from '../static/federations.json'
-import communiques from '../static/communiques.json'
-import en_members from '../static/en_members.json'
-import contacts from '../static/contacts.json'
+import strings from '~/static/strings.json'
+import values from '~/static/values.json'
+import statistics from '~/static/statistics.json'
+import articles from '~/static/articles.json'
+import partners from '~/static/partners.json'
+import socials from '~/static/socials.json'
+import missions from '~/static/missions.json'
+import materiel from '~/static/materiel.json'
+import federations from '~/static/federations.json'
+import communiques from '~/static/communiques.json'
+import en_members from '~/static/en_members.json'
+import contacts from '~/static/contacts.json'
 
 function findPage(id: string) {
     for (const string of strings) {
@@ -48,7 +48,7 @@ export const getValues = () => {
 
 export const generateDynamicData = () => {
     return {
-        federationCount: (getFederations().filter(federation => federation.active)).length,
+        federationCount: String(getFederations().filter(federation => federation.active).length),
     }
 }
 
@@ -61,7 +61,9 @@ export const getStatistics = () => {
                 const dynamicVarName = statistic.properties.Valeur.rich_text[0].plain_text.split(":")[1];
                 processedStatistics.push({
                     title: statistic.properties.ID.title[0].plain_text,
-                    value: dynamicData[dynamicVarName],
+                    // TODO: Add error handling for dynamic data
+                    // @ts-ignore
+                    value: dynamicData[dynamicVarName] || "Error",
                     icon: statistic.properties.Icone.rich_text[0].plain_text
                 })
             } else {
@@ -238,7 +240,7 @@ export const getEnMembers = () => {
                 role: member.properties.Fonction.rich_text[0].plain_text,
                 email: member.properties.Email.email,
                 phone: member.properties.Telephone.phone_number,
-                instagram: member.properties.Instagram.url
+                instagram: member.properties.Instagram.url,
             })
         }
     }

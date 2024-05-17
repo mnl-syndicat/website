@@ -2,38 +2,45 @@
 const route = useRoute()
 const {$notion} = useNuxtApp();
 const fedeCode = route.params.fede;
-const federation = getFederations().find(federation => federation.code === fedeCode);
+const federation = getFederations().find(federation => federation.code === fedeCode)!;
 
 const {data: blockMap} = useAsyncData(federation.notionId, () =>
     $notion.getPageBlocks(federation.notionId)
 );
 
+const urlRewrite = (url: string) => {
+  return `/federation/${fedeCode}/${url}`;
+};
+
+
 useHead({
   title: `MNL ${federation.code} (${federation.name})`,
   meta: [
-    { name: 'description', content: `Espace de la fédération ${federation.name} du MNL` },
-    { name: 'og:title', content: `MNL ${federation.code} (${federation.name})` },
-    { name: 'og:description', content: `Espace de la fédération ${federation.name} du MNL` },
+    {name: 'description', content: `Espace de la fédération ${federation.name} du MNL`},
+    {name: 'og:title', content: `MNL ${federation.code} (${federation.name})`},
+    {name: 'og:description', content: `Espace de la fédération ${federation.name} du MNL`},
   ],
 });
 </script>
 
 <template>
-  <top-bar current-tab="/federations" />
+  <top-bar current-tab="/federations"/>
   <section id="federation">
     <h1>MNL {{ federation.code }} ({{ federation.name }})</h1>
     <div class="contact-button-list">
-      <btn :href="'mailto:' + federation.email" icon="ph:envelope-simple-bold" :label="federation.email" />
-      <btn v-if="federation.instagram" :href="federation.instagram" icon="ph:instagram-logo-bold" :label="'@' + federation.instagram.match(/^https?:\/\/(?:www\.)?instagram\.com\/([^/?]+)/i)?.[1] || 'Instagram'" />
+      <btn :href="'mailto:' + federation.email" icon="ph:envelope-simple-bold" :label="federation.email"/>
+      <btn v-if="federation.instagram" :href="federation.instagram" icon="ph:instagram-logo-bold"
+           :label="'@' + federation.instagram.match(/^https?:\/\/(?:www\.)?instagram\.com\/([^/?]+)/i)?.[1] || 'Instagram'"/>
     </div>
 
     <p class="disclaimer">
-      L'espace ci-dessous est entièrement géré par la fédération {{ federation.name }} du MNL. <br> Les propos tenus ici n'engagent que le MNL {{ federation.code }}.
+      L'espace ci-dessous est entièrement géré par la fédération {{ federation.name }} du MNL. <br> Les propos tenus ici
+      n'engagent que le MNL {{ federation.code }}.
     </p>
 
     <NotionRenderer
         :blockMap="blockMap"
-        :mapPageUrl="pageId => '/' + fedeCode + '/' + pageId"
+        :mapPageUrl="urlRewrite"
     />
   </section>
 </template>
@@ -43,6 +50,7 @@ useHead({
 
 #federation {
   gap: 20px;
+
   .contact-button-list {
     display: flex;
     gap: 20px;

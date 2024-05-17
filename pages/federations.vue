@@ -1,10 +1,10 @@
-<script setup>
+<script setup lang="ts">
 import FederationsMap from '~/static/img/federations.svg';
 
 const searchTerm = ref('');
 const federations = getFederations();
 
-function levenshteinDistance(a, b) {
+function levenshteinDistance(a: string, b: string) {
   if (a.length === 0) return b.length;
   if (b.length === 0) return a.length;
 
@@ -45,10 +45,10 @@ const filteredFederations = computed(() => {
 onMounted(() => {
   for (const federation of federations) {
     if (federation.active) {
-      document.querySelector('.departement' + federation.code.toLowerCase()).classList.add('active');
+      document.querySelector('.departement' + federation.code.toLowerCase())!.classList.add('active');
 
-      document.querySelector('.departement' + federation.code.toLowerCase()).addEventListener('click', () => {
-        window.location.href = '/' + federation.code;
+      document.querySelector('.departement' + federation.code.toLowerCase())!.addEventListener('click', () => {
+        window.location.href = '/federation/' + federation.code;
       });
     }
   }
@@ -77,7 +77,7 @@ useHead({
 
         <div class="federation-list">
           <div v-for="federation in filteredFederations" :key="federation.code" class="federation">
-            <a :href="'/' + federation.code">{{ federation.code }} {{ federation.name }}</a>
+            <a :href="'/federation/' + federation.code">{{ federation.code }} {{ federation.name }}</a>
           </div>
         </div>
       </div>

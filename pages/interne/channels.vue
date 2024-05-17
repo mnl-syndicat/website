@@ -15,7 +15,3 @@ const {data: blockMap} = useAsyncData('4ad9a1a3f40143d7bd3fc489c5d0b2ce', () =>
     />
   </section>
 </template>
-
-<style scoped lang="scss">
-
-</style>

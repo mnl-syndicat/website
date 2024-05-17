@@ -1,6 +1,9 @@
 <script setup lang="ts">
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
+const scopes = ref([
+  {name: '', id: ''}
+])
 
 let links = [
   {
@@ -42,12 +45,13 @@ let links = [
 
 const {data, error} = await supabase.from('memberships').select(`
     scopes (id, name)
-  `).eq('id', user.value.id)
+  `).eq('id', user.value!.id)
 
+scopes.value = data![0].scopes
 
 if (error) {
   console.error(error)
-} else if (data[0].scopes.some(scope => scope.name === 'Équipe Nationale')) {
+} else if (scopes.value.some(scope => scope.name === 'Équipe Nationale')) {
   links.push({
     label: 'Mots de passe',
     icon: 'ph:lock-bold',

@@ -3,7 +3,7 @@ const route = useRoute()
 const {$notion} = useNuxtApp();
 const articleSlug = route.params.slug;
 
-const article = getArticles().find(article => article.link === articleSlug);
+const article = getArticles().find(article => article.link === articleSlug)!;
 
 const {data: blockMap} = useAsyncData(article.link, () =>
     $notion.getPageBlocks(article.id)
@@ -16,7 +16,7 @@ onMounted(() => {
 
   images.forEach(image => {
     image.addEventListener('click', () => {
-      window.open(image.src, '_blank');
+      window.open(image.getAttribute('src')!, '_blank');
     });
   });
 })

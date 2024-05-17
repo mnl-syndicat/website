@@ -3,8 +3,7 @@ const route = useRoute()
 const {$notion} = useNuxtApp();
 const communiqueSlug = route.params.slug;
 
-const communique = getCommuniques().find(communique => communique.link === communiqueSlug);
-console.log(communique)
+const communique = getCommuniques().find(communique => communique.link === communiqueSlug)!;
 
 const {data: blockMap} = useAsyncData(communique.link, () =>
     $notion.getPageBlocks(communique.id)

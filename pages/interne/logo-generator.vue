@@ -5,10 +5,11 @@ const zipTextX = computed(() => {
 })
 const backgroundType = ref('color')
 const backgroundColor = ref('#5A3C5A')
-const backgroundImage = ref(null)
-
-const backgroundPatternImage = ref(null)
-const backgroundRect = ref(null)
+const backgroundImage = ref<HTMLInputElement>()
+const backgroundPatternImage = ref<SVGImageElement>()
+const backgroundRect = ref<SVGRectElement>()
+const logoSvg = ref<SVGSVGElement>()
+const canvas = ref<HTMLCanvasElement>()
 
 watch(zipCode, (newValue) => {
   updateCanvas()
@@ -30,56 +31,62 @@ watch(backgroundColor, () => {
 const updateImage = async () => {
   backgroundColor.value = "#000"
 
-  const file = backgroundImage.value.files[0]
+  const file = ref<File>()
+
+  if (backgroundImage.value!.files && backgroundImage.value!.files![0]) {
+    file.value = backgroundImage.value!.files[0]
+  } else {
+    return
+  }
+
   const reader = new FileReader()
 
   reader.onload = () => {
     const img = new Image()
-    img.src = reader.result
+    if (typeof reader.result === "string") {
+      img.src = reader.result
+    }
     img.onload = async () => {
-      const canvas = document.createElement('canvas')
-      const ctx = canvas.getContext('2d')
-      canvas.width = img.width
-      canvas.height = img.height
-      ctx.drawImage(img, 0, 0, img.width, img.height)
-      backgroundPatternImage.value.attributes['href'].value = canvas.toDataURL()
-      backgroundRect.value.attributes['fill'].value = 'url(#backgroundPattern)'
-      const svg = document.querySelector('.logoSvg')
-      const paths = svg.querySelectorAll('path, #numRect')
+      const tempCanvas = document.createElement('canvas')
+      const ctx = tempCanvas.getContext('2d')
+      tempCanvas.width = img.width
+      tempCanvas.height = img.height
+      ctx!.drawImage(img, 0, 0, img.width, img.height)
+      backgroundPatternImage.value!.setAttribute('href', tempCanvas.toDataURL())
+      backgroundRect.value!.setAttribute('fill', 'url(#backgroundPattern)')
+
+      const paths = logoSvg.value!.querySelectorAll('path, #numRect')
       for (const path of paths) {
-        path.attributes['filter'].value = 'url(#shadow)'
+        path.setAttribute('filter', 'url(#shadow)')
       }
 
       await new Promise(resolve => setTimeout(resolve, 1000))
 
-      updateCanvas()
+      await updateCanvas()
     }
   }
 
-  reader.readAsDataURL(file)
+  reader.readAsDataURL(file.value)
 }
 
 const downloadLogo = () => {
-  const canvas = document.querySelector('canvas')
   const link = document.createElement('a')
   link.download = 'logo.png'
-  link.href = canvas.toDataURL()
+  link.href = canvas.value!.toDataURL()
   link.click()
 }
 
 const updateCanvas = async () => {
   await new Promise(resolve => setTimeout(resolve, 100))
-  const svg = document.querySelector('.logoSvg')
-  const canvas = document.querySelector('canvas')
-  const ctx = canvas.getContext('2d')
-  const svgString = new XMLSerializer().serializeToString(svg)
+  const ctx = canvas.value!.getContext('2d')
+  const svgString = new XMLSerializer().serializeToString(logoSvg.value!)
   const img = new Image()
   const blob = new Blob([svgString], {type: 'image/svg+xml'})
   const url = URL.createObjectURL(blob)
   img.src = url
 
   img.onload = () => {
-    ctx.drawImage(img, 0, 0)
+    ctx!.drawImage(img, 0, 0)
     URL.revokeObjectURL(url)
   }
 }
@@ -113,8 +120,8 @@ onMounted(async () => {
 
         <btn label="Télécharger" icon="ph:download-bold" @click="downloadLogo()" />
       </div>
-      <canvas height="300" width="300"></canvas>
-      <svg width="300" height="300" viewBox="0 0 1009 1000" fill="none" xmlns="http://www.w3.org/2000/svg" class="logoSvg">
+      <canvas height="300" width="300" ref="canvas"></canvas>
+      <svg width="300" height="300" viewBox="0 0 1009 1000" fill="none" xmlns="http://www.w3.org/2000/svg" class="logoSvg" ref="logoSvg">
         <defs>
           <pattern id="backgroundPattern" patternUnits="userSpaceOnUse" width="100%" height="100%" viewBox="0 0 1000 1000" preserveAspectRatio="xMidYMid slice">
             <image href="" width="100%" height="100%" ref="backgroundPatternImage" preserveAspectRatio="xMidYMid slice" />

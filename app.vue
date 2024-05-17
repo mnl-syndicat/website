@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 useHead({
   title: 'Mouvement National Lycéen',
   meta: [

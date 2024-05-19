@@ -35,14 +35,14 @@ let links = [
     path: 'https://interne.mnl-syndicat.fr',
   },
   {
-    label: 'Générateur de logos',
+    label: 'Générateur de logo',
     icon: 'ph:square-logo-bold',
     path: '/interne/logo-generator',
   },
   {
     label: 'Générateur d\'image d\'illustration',
     icon: 'ph:paint-brush-bold',
-    path: '/interne/visual-generator',
+    path: '/interne/illus-image-generator',
   },
 ]
 

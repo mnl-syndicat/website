@@ -15,11 +15,16 @@ useHead({
     <h1>CONTACT</h1>
     <div class="contacts">
       <a class="contact" v-for="contact in getContacts()" :key="contact.id" :href="'mailto:' + contact.email">
-        <Icon :name="contact.icon"/>
-        <h3>{{ contact.name }}</h3>
+        <h3>
+          <Icon :name="contact.icon"/>
+          {{ contact.name }}
+        </h3>
+        <p>{{ contact.email }}</p>
       </a>
     </div>
     <p>
+      <Icon name="ph:envelope-bold"/>
+      Email général : <a :href="'mailto:' + getString('orgEmail')">{{ getString('orgEmail') }}</a> <br>
       <Icon name="ph:phone-bold"/>
       Téléphone : <a :href="'tel:' + getString('orgPhone')">{{ getString('orgPhone') }}</a> <br>
       <Icon name="ph:signpost-bold"/>
@@ -59,17 +64,19 @@ section {
     gap: 20px;
     flex-wrap: wrap;
     justify-content: start;
-    width: 790px;
+    width: 940px;
 
     .contact {
       display: flex;
       gap: 10px;
-      width: 250px;
+      width: 300px;
       padding: 15px;
       background: var(--surface-background-color);
       align-items: center;
       height: max-content;
+      flex-direction: column;
       @include main-border;
+      border-radius: 3px;
 
       .icon {
         font-size: 28px;
@@ -79,6 +86,16 @@ section {
         font-size: 22px;
         font-weight: 700;
         line-height: 1;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      p {
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 1.5;
+        word-break: break-all;
       }
 
       a {
@@ -100,9 +117,10 @@ section {
       flex-direction: column;
       gap: 20px;
       width: 100%;
-    .contact {
-      width: 100%;
-    }
+
+      .contact {
+        width: 100%;
+      }
     }
 
     p {

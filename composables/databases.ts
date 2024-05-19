@@ -161,5 +161,6 @@ export const getContacts = () => {
             icon: contact.properties.Icone.rich_text[0].plain_text,
             email: contact.properties.Email.email,
             id: contact.id,
-        }));
+        }))
+        .sort((a, b) => a.name.localeCompare(b.name));
 };

@@ -1,9 +1,12 @@
 <script setup lang="ts">
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
-const scopes = ref([
-  {name: '', id: ''}
-])
+const isEnMember = ref(false)
+const enLinks = ref([{
+  label: '',
+  icon: '',
+  path: '',
+}])
 
 let links = [
   {
@@ -47,16 +50,25 @@ const {data, error} = await supabase.from('memberships').select(`
     scopes (id, name)
   `).eq('id', user.value!.id)
 
-scopes.value = data![0].scopes
+const scopes = data![0].scopes
+// @ts-ignore
+isEnMember.value = scopes.some((scope: { id: string; name: string }) => scope.name === 'Équipe Nationale')
 
 if (error) {
   console.error(error)
-} else if (scopes.value.some(scope => scope.name === 'Équipe Nationale')) {
-  links.push({
-    label: 'Mots de passe',
-    icon: 'ph:lock-bold',
-    path: 'https://mdp.mnl-syndicat.fr',
-  })
+} else if (isEnMember) {
+  enLinks.value = [
+    {
+      label: 'Mots de passe',
+      icon: 'ph:lock-bold',
+      path: 'https://mdp.mnl-syndicat.fr',
+    },
+    {
+     label: 'Campagnes de mails',
+      icon: 'ph:envelope-simple-bold',
+      path: 'https://sender.net',
+    },
+  ];
 }
 
 useHead(
@@ -82,6 +94,11 @@ useHead(
     <div class="card-grid">
       <btn :label="link.label" :icon="link.icon" :href="link.path" v-for="link in links.slice(1)" weight="secondary"/>
     </div>
+
+    <h2 v-if="isEnMember">Outils de l'équipe nationale</h2>
+    <div class="card-grid">
+      <btn :label="link.label" :icon="link.icon" :href="link.path" v-for="link in enLinks" weight="secondary"/>
+    </div>
   </section>
 </template>
 
@@ -90,6 +107,10 @@ useHead(
   justify-content: center;
   gap: 15px;
   width: 700px;
+}
+
+h2 {
+  font-size: 32px;
 }
 
 @media (max-width: 768px) {

@@ -28,6 +28,15 @@ const resetPassword = async () => {
     openModal.value = true
   }
 }
+
+useHead({
+  title: 'Réinitialisation de mot de passe — MNL',
+  meta: [
+    {name: 'description', content: 'Réinitialisation de mot de passe sur le site du Mouvement National Lycéen'},
+    {name: 'og:title', content: 'Réinitialisation de mot de passe — Mouvement National Lycéen'},
+    {name: 'og:description', content: 'Réinitialisation de mot de passe sur le site du Mouvement National Lycéen'},
+  ],
+})
 </script>
 
 <template>

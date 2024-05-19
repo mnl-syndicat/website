@@ -55,10 +55,10 @@ onMounted(() => {
 });
 
 useHead({
-  title: 'MNL — Fédérations',
+  title: 'Fédérations — MNL',
   meta: [
     {name: 'description', content: 'Retrouvez toutes les fédérations du Mouvement National Lycéen'},
-    {name: 'og:title', content: 'Mouvement National Lycéen — Fédérations'},
+    {name: 'og:title', content: 'Fédérations — Mouvement National Lycéen'},
     {name: 'og:description', content: 'Retrouvez toutes les fédérations du Mouvement National Lycéen'},
   ],
 });

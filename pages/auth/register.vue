@@ -82,6 +82,15 @@ const confirmEmail = async () => {
 
   navigateTo("/interne")
 }
+
+useHead({
+  title: 'Créer un compte — MNL',
+  meta: [
+    {name: 'description', content: 'Création de compte sur le site du Mouvement National Lycéen'},
+    {name: 'og:title', content: 'Créer un compte — Mouvement National Lycéen'},
+    {name: 'og:description', content: 'Création de compte sur le site du Mouvement National Lycéen'},
+  ],
+})
 </script>
 
 <template>

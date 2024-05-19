@@ -1,3 +1,16 @@
+<script setup lang="ts">
+useHead(
+  {
+    title: 'Communiqués — MNL',
+    meta: [
+      { name: 'description', content: 'Retrouvez tous les communiqués du Mouvement National Lycéen' },
+      { name: 'og:title', content: 'Communiqués — Mouvement National Lycéen' },
+      { name: 'og:description', content: 'Retrouvez tous les communiqués du Mouvement National Lycéen' },
+    ],
+  }
+);
+</script>
+
 <template>
   <top-bar current-tab="/communiques"/>
   <section class="communiques">

@@ -2,10 +2,10 @@
 const selectedCategory = ref('all');
 
 useHead({
-  title: 'MNL — Articles',
+  title: 'Articles — MNL',
   meta: [
     {name: 'description', content: 'Retrouvez tous les articles du Mouvement National Lycéen'},
-    {name: 'og:title', content: 'Mouvement National Lycéen — Articles'},
+    {name: 'og:title', content: 'Articles — Mouvement National Lycéen'},
     {name: 'og:description', content: 'Retrouvez tous les articles du Mouvement National Lycéen'},
   ],
 })

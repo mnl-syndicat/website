@@ -87,6 +87,15 @@ const downloadImage = async () => {
   noiseImageRef.value!.setAttribute('href', '/noise.png')
   loading.value = false
 }
+
+useHead({
+  title: 'Générateur d\'image d\'illustration — MNL',
+  meta: [
+    {name: 'description', content: 'Générateur d\'image d\'illustration du Mouvement National Lycéen'},
+    {name: 'og:title', content: 'Générateur d\'image d\'illustration — Mouvement National Lycéen'},
+    {name: 'og:description', content: 'Générateur d\'image d\'illustration du Mouvement National Lycéen'},
+  ],
+});
 </script>
 
 <template>

@@ -31,7 +31,6 @@ useHead({
     { name: 'og:time', content: article.date },
   ],
 });
-
 </script>
 
 <template>

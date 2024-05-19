@@ -37,6 +37,15 @@ const logout = async () => {
   await supabase.auth.signOut()
   navigateTo('/')
 }
+
+useHead({
+  title: 'Mon profil — MNL',
+  meta: [
+    {name: 'description', content: 'Profil de l\'utilisateur sur le site du Mouvement National Lycéen'},
+    {name: 'og:title', content: 'Mon profil — Mouvement National Lycéen'},
+    {name: 'og:description', content: 'Profil de l\'utilisateur sur le site du Mouvement National Lycéen'},
+  ],
+})
 </script>
 
 <template>

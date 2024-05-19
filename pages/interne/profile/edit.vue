@@ -74,6 +74,15 @@ const saveProfile = async () => {
     navigateTo('/interne/profile')
   }
 }
+
+useHead({
+  title: 'Profil — MNL',
+  meta: [
+    {name: 'description', content: 'Mon profil du Mouvement National Lycéen'},
+    {name: 'og:title', content: 'Profil — Mouvement National Lycéen'},
+    {name: 'og:description', content: 'Mon profil du Mouvement National Lycéen'},
+  ],
+});
 </script>
 
 <template>

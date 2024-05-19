@@ -1,9 +1,9 @@
 <script setup lang="ts">
 useHead({
-  title: 'MNL — Adhérer',
+  title: 'Adhérer — MNL',
   meta: [
     {name: 'description', content: 'Adhérer au Mouvement National Lycéen'},
-    {name: 'og:title', content: 'Mouvement National Lycéen — Adhérer'},
+    {name: 'og:title', content: 'Adhérer — Mouvement National Lycéen'},
     {name: 'og:description', content: 'Adhérer au Mouvement National Lycéen'},
   ],
 })

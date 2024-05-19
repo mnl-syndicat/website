@@ -58,6 +58,14 @@ const register = async () => {
   }
 }
 
+useHead({
+  title: 'Connexion — MNL',
+  meta: [
+    {name: 'description', content: 'Connexion à l\'espace interne du Mouvement National Lycéen'},
+    {name: 'og:title', content: 'Connexion — Mouvement National Lycéen'},
+    {name: 'og:description', content: 'Connexion à l\'espace interne du Mouvement National Lycéen'},
+  ],
+});
 </script>
 
 <template>

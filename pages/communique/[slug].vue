@@ -9,6 +9,14 @@ const {data: blockMap} = useAsyncData(communique.link, () =>
     $notion.getPageBlocks(communique.id)
 );
 
+useHead({
+    title: communique.title + ' — MNL',
+    meta: [
+        {name: 'description', content: communique.title},
+        {name: 'og:title', content: communique.title + ' — Mouvement National Lycéen'},
+        {name: 'og:description', content: communique.title},
+    ],
+})
 </script>
 
 <template>

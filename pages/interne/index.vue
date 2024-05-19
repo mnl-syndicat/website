@@ -58,6 +58,17 @@ if (error) {
     path: 'https://mdp.mnl-syndicat.fr',
   })
 }
+
+useHead(
+  {
+    title: 'Espace adhérent — MNL',
+    meta: [
+      { name: 'description', content: 'Accédez à toutes les fonctionnalités de votre espace adhérent' },
+      { name: 'og:title', content: 'Espace adhérent — Mouvement National Lycéen' },
+      { name: 'og:description', content: 'Accédez à toutes les fonctionnalités de votre espace adhérent' },
+    ],
+  }
+);
 </script>
 
 <template>

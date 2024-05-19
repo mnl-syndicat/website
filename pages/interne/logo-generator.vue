@@ -94,6 +94,17 @@ const updateCanvas = async () => {
 onMounted(async () => {
   await updateCanvas()
 });
+
+useHead(
+  {
+    title: 'Générateur de logos — MNL',
+    meta: [
+      { name: 'description', content: 'Générez des logos personnalisés pour votre fédération' },
+      { name: 'og:title', content: 'Générateur de logos — Mouvement National Lycéen' },
+      { name: 'og:description', content: 'Générez des logos personnalisés pour votre fédération' },
+    ],
+  }
+)
 </script>
 
 <template>

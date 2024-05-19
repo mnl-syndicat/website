@@ -5,7 +5,8 @@ export default defineNuxtConfig({
         '@nuxtjs/google-fonts',
         "@nuxt/image",
         "@nuxtjs/sitemap",
-        "@nuxtjs/supabase"
+        "@nuxtjs/supabase",
+        '@nuxtjs/robots',
     ],
 
     supabase: {
@@ -14,6 +15,13 @@ export default defineNuxtConfig({
             login: '/auth/login',
             callback: '/interne',
         },
+    },
+
+    robots: {
+      rules: {
+          UserAgent: '*',
+          Disallow: '/interne',
+      }
     },
 
     typescript: {

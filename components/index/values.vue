@@ -17,6 +17,7 @@
 section {
   flex-direction: row;
   padding: 50px 5vw;
+  gap: 50px;
 
   h1 {
     display: flex;
@@ -50,12 +51,12 @@ section {
     flex-wrap: wrap;
     flex-direction: row;
     gap: 20px;
+    justify-content: space-between;
 
     .value {
       display: flex;
       flex-direction: column;
       gap: 10px;
-      margin-bottom: 20px;
       width: calc(50% - 20px);
 
       .title {

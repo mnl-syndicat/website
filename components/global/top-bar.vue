@@ -149,6 +149,11 @@ header {
     justify-content: center;
     flex: 1;
 
+    &.buttons {
+      flex-wrap: wrap;
+      justify-content: start;
+    }
+
     .userIcon {
       color: var(--main-cta-color);
       font-size: 32px;

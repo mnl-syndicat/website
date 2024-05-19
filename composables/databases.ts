@@ -1,267 +1,160 @@
-import strings from '~/static/strings.json'
-import values from '~/static/values.json'
-import statistics from '~/static/statistics.json'
-import articles from '~/static/articles.json'
-import partners from '~/static/partners.json'
-import socials from '~/static/socials.json'
-import missions from '~/static/missions.json'
-import materiel from '~/static/materiel.json'
-import federations from '~/static/federations.json'
-import communiques from '~/static/communiques.json'
-import en_members from '~/static/en_members.json'
-import contacts from '~/static/contacts.json'
+import strings from '~/static/strings.json';
+import values from '~/static/values.json';
+import statistics from '~/static/statistics.json';
+import articles from '~/static/articles.json';
+import partners from '~/static/partners.json';
+import socials from '~/static/socials.json';
+import missions from '~/static/missions.json';
+import materiel from '~/static/materiel.json';
+import federations from '~/static/federations.json';
+import communiques from '~/static/communiques.json';
+import en_members from '~/static/en_members.json';
+import contacts from '~/static/contacts.json';
 
-function findPage(id: string) {
-    for (const string of strings) {
-        if (string.properties.ID.rich_text.length > 0 && string.properties.ID.rich_text[0].plain_text === id) {
-            return string
-        }
-    }
-    return null;
-}
+const findPage = (id: string) => strings.find(
+    string => string.properties.ID.rich_text[0]?.plain_text === id
+) || null;
 
 export const getString = (id: string) => {
     const page = findPage(id);
-    return page && page.properties.Contenu.rich_text.length > 0 ? page.properties.Contenu.rich_text[0].plain_text : "String not found";
-}
+    return page?.properties.Contenu.rich_text[0]?.plain_text || "String not found";
+};
 
 export const getImage = (id: string) => {
     const page = findPage(id);
-    return page && page.properties.Image.files.length > 0 ? page.properties.Image.files[0].file.url : "Image not found";
-}
+    return page?.properties.Image.files[0]?.file.url || "Image not found";
+};
 
-export const getValues = () => {
-    let processedValues = [];
-    for (const value of values) {
-        if (value.properties.ID.title.length > 0 && value.properties.Description.rich_text.length > 0 && value.properties.Icone.rich_text.length > 0) {
-            processedValues.push({
-                title: value.properties.ID.title[0].plain_text,
-                description: value.properties.Description.rich_text[0].plain_text,
-                icon: value.properties.Icone.rich_text[0].plain_text
-            })
-        }
-    }
+const processEntries = (entries: any[], fields: [string, string][]) =>
+    entries
+        .filter(entry => fields.every(([jsonField]) => entry.properties[jsonField]?.[entry.properties[jsonField].type]?.length > 0))
+        .map(entry => fields.reduce((acc, [jsonField, exportName]) => {
+            acc[exportName] = entry.properties[jsonField][entry.properties[jsonField].type][0].plain_text;
+            return acc;
+        }, {} as Record<string, string>));
 
-    return processedValues;
-}
+export const getValues = () => processEntries(values, [
+    ['ID', 'title'],
+    ['Description', 'description'],
+    ['Icone', 'icon']
+]);
 
-
-export const generateDynamicData = () => {
-    return {
-        federationCount: String(getFederations().filter(federation => federation.active).length),
-    }
-}
+const generateDynamicData = () => ({
+    federationCount: String(federations.filter(federation => federation.properties.Active.checkbox).length),
+});
 
 export const getStatistics = () => {
-    let processedStatistics = [];
     const dynamicData = generateDynamicData();
-    for (const statistic of statistics) {
-        if (statistic.properties.ID.title.length > 0 && statistic.properties.Valeur.rich_text.length > 0 && statistic.properties.Icone.rich_text.length > 0) {
-            if (statistic.properties.Valeur.rich_text[0].plain_text.startsWith("dynamic:")) {
-                const dynamicVarName = statistic.properties.Valeur.rich_text[0].plain_text.split(":")[1];
-                processedStatistics.push({
-                    title: statistic.properties.ID.title[0].plain_text,
-                    // TODO: Add error handling for dynamic data
-                    // @ts-ignore
-                    value: dynamicData[dynamicVarName] || "Error",
-                    icon: statistic.properties.Icone.rich_text[0].plain_text
-                })
-            } else {
-                processedStatistics.push({
-                    title: statistic.properties.ID.title[0].plain_text,
-                    value: statistic.properties.Valeur.rich_text[0].plain_text,
-                    icon: statistic.properties.Icone.rich_text[0].plain_text
-                })
-            }
-        }
-    }
-
-    return processedStatistics;
-}
+    return statistics
+        .filter(stat => stat.properties.ID.title.length > 0 && stat.properties.Valeur.rich_text.length > 0 && stat.properties.Icone.rich_text.length > 0)
+        .map(stat => ({
+            title: stat.properties.ID.title[0].plain_text,
+            value: stat.properties.Valeur.rich_text[0].plain_text.startsWith("dynamic:")
+                // @ts-ignore - can not make it type safe as it is dynamic
+                ? dynamicData[stat.properties.Valeur.rich_text[0].plain_text.split(":")[1]] || "Error"
+                : stat.properties.Valeur.rich_text[0].plain_text,
+            icon: stat.properties.Icone.rich_text[0].plain_text,
+        }));
+};
 
 export const getArticles = () => {
-    let processedArticles = [];
-    articles.sort((a, b) => {
-        return new Date(b.properties.Date.date.start).getTime() - new Date(a.properties.Date.date.start).getTime();
-    });
+    return articles
+        .filter(article => article.properties.Publie.checkbox && article.properties.ID.title.length > 0 && article.properties.Image.files.length > 0 && article.properties.Lien.rich_text.length > 0 && article.properties.Date.date.start)
+        .sort((a, b) => new Date(b.properties.Date.date.start).getTime() - new Date(a.properties.Date.date.start).getTime())
+        .map(article => ({
+            title: article.properties.ID.title[0].plain_text,
+            image: article.properties.Image.files[0].file.url,
+            link: article.properties.Lien.rich_text[0].plain_text,
+            date: article.properties.Date.date.start,
+            category: article.properties.Categorie.select.name,
+            id: article.id,
+        }));
+};
 
-    for (const article of articles) {
-        if (article.properties.Publie.checkbox === true && article.properties.ID.title.length > 0 && article.properties.Image.files.length > 0 && article.properties.Lien.rich_text.length > 0 && article.properties.Date.date.start) {
-            processedArticles.push({
-                title: article.properties.ID.title[0].plain_text,
-                image: article.properties.Image.files[0].file.url,
-                link: article.properties.Lien.rich_text[0].plain_text,
-                date: article.properties.Date.date.start,
-                category: article.properties.Categorie.select.name,
-                id: article.id
-            })
-        }
-    }
-
-    return processedArticles;
-}
-
-export const getArticlesCategories = () => {
-    let categories = [];
-    for (const article of getArticles()) {
-        categories.push(article.category);
-    }
-
-    categories.sort((a, b) => { return a.localeCompare(b); });
-
-    return [...new Set(categories)];
-}
+export const getArticlesCategories = () => [...new Set(getArticles().map(article => article.category))].sort((a, b) => a.localeCompare(b));
 
 export const getPartners = () => {
-    let processedPartners = [];
-    for (const partner of partners) {
-        if (partner.properties.ID.title.length > 0 && partner.properties.Image.files.length > 0 && partner.properties.Link.url) {
-            processedPartners.push({
-                name: partner.properties.ID.title[0].plain_text,
-                icon: partner.properties.Image.files[0].file.url,
-                link: partner.properties.Link.url
-            })
-        }
-    }
+    return partners
+        .filter(partner => partner.properties.ID.title.length > 0 && partner.properties.Image.files.length > 0 && partner.properties.Link.url)
+        .map(partner => ({
+            name: partner.properties.ID.title[0].plain_text,
+            icon: partner.properties.Image.files[0].file.url,
+            link: partner.properties.Link.url,
+        }));
+};
 
-    return processedPartners;
-}
+export const getSocials = () => processEntries(socials, [
+    ['ID', 'name'],
+    ['Icone', 'icon'],
+    ['Link', 'link']
+]);
 
-export const getSocials = () => {
-    let processedSocials = [];
-    for (const social of socials) {
-        if (social.properties.ID.title.length > 0 && social.properties.Icone.rich_text.length > 0 && social.properties.Link.url) {
-            processedSocials.push({
-                name: social.properties.ID.title[0].plain_text,
-                icon: social.properties.Icone.rich_text[0].plain_text,
-                link: social.properties.Link.url
-            })
-        }
-    }
-
-    return processedSocials;
-}
-
-export const getMissions = () => {
-    let processedMissions = [];
-    for (const mission of missions) {
-        if (mission.properties.ID.title.length > 0 && mission.properties.Description.rich_text.length > 0) {
-            processedMissions.push({
-                title: mission.properties.ID.title[0].plain_text,
-                description: mission.properties.Description.rich_text[0].plain_text,
-            })
-        }
-    }
-
-    return processedMissions;
-}
+export const getMissions = () => processEntries(missions, [
+    ['ID', 'title'],
+    ['Description', 'description']
+]);
 
 export const getMateriel = () => {
-    let processedMateriel = [];
-    for (const item of materiel) {
-        if (item.properties.ID.title.length > 0 && item.properties.Image.files.length > 0 && item.properties.File.files.length > 0) {
-            processedMateriel.push({
-                title: item.properties.ID.title[0].plain_text,
-                image: item.properties.Image.files[0].file.url,
-                file: "https://www.notion.so/signed/" + encodeURIComponent(item.properties.File.files[0].file.url.replace(/\?.*$/, '')) + "?table=block&id=" + item.id.replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5'),
-            })
-        }
-    }
-
-    return processedMateriel;
-}
+    return materiel
+        .filter(item => item.properties.ID.title.length > 0 && item.properties.Image.files.length > 0 && item.properties.File.files.length > 0)
+        .map(item => ({
+            title: item.properties.ID.title[0].plain_text,
+            image: item.properties.Image.files[0].file.url,
+            file: `https://www.notion.so/signed/${encodeURIComponent(item.properties.File.files[0].file.url.replace(/\?.*$/, ''))}?table=block&id=${item.id.replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5')}`,
+        }));
+};
 
 export const getFederations = () => {
-    let processedFederations = [];
-
-    for (const federation of federations) {
-        processedFederations.push({
+    return federations
+        .map(federation => ({
             name: federation.properties.Departement.title[0].plain_text,
             code: federation.properties.Code.rich_text[0].plain_text,
             email: federation.properties.Email.email,
             active: federation.properties.Active.checkbox,
             instagram: federation.properties.Instagram.url,
-            notionId: federation.id
-        })
-    }
-
-    processedFederations.sort((a, b) => {
-        return a.code.localeCompare(b.code);
-    });
-
-    return processedFederations;
-}
+            notionId: federation.id,
+        }))
+        .sort((a, b) => a.code.localeCompare(b.code));
+};
 
 export const getCommuniques = () => {
-    let processedCommuniques = [];
-
-    for (const communique of communiques) {
-        if (communique.properties.Publie.checkbox === true && communique.properties.ID.title.length > 0 && communique.properties.Image.files.length > 0 && communique.properties.Lien.rich_text.length > 0 && communique.properties.Date.date) {
-
-            let fileUrl = "";
-            if (communique.properties.File.files.length > 0) {
-                fileUrl =
-                    "https://www.notion.so/signed/" +
-                    encodeURIComponent(
-                        communique.properties.File.files[0].file.url.replace(/\?.*$/, "")
-                    ) +
-                    "?table=block&id=" +
-                    communique.id.replace(
-                        /^(.{8})(.{4})(.{4})(.{4})(.{12})$/,
-                        "$1-$2-$3-$4-$5"
-                    );
-            }
-
-            processedCommuniques.push({
-                title: communique.properties.ID.title[0].plain_text,
-                image: communique.properties.Image.files[0].file.url,
-                link: communique.properties.Lien.rich_text[0].plain_text,
-                date: communique.properties.Date.date.start,
-                file: fileUrl,
-                id: communique.id
-            })
-        }
-    }
-
-    processedCommuniques.sort((a, b) => {
-        return new Date(b.date).getTime() - new Date(a.date).getTime();
-    });
-
-    return processedCommuniques;
-}
+    return communiques
+        .filter(communique => communique.properties.Publie.checkbox && communique.properties.ID.title.length > 0 && communique.properties.Image.files.length > 0 && communique.properties.Lien.rich_text.length > 0 && communique.properties.Date.date && communique.properties.Date.date.start)
+        .map(communique => ({
+            title: communique.properties.ID.title[0].plain_text,
+            image: communique.properties.Image.files[0].file.url,
+            link: communique.properties.Lien.rich_text[0].plain_text,
+            // @ts-ignore - date is always defined as it is in the filter
+            date: communique.properties.Date.date.start,
+            file: communique.properties.File.files.length > 0
+                ? `https://www.notion.so/signed/${encodeURIComponent(communique.properties.File.files[0].file.url.replace(/\?.*$/, ''))}?table=block&id=${communique.id.replace(/^(.{8})(.{4})(.{4})(.{4})(.{12})$/, '$1-$2-$3-$4-$5')}`
+                : '',
+            id: communique.id,
+        }))
+        .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
+};
 
 export const getEnMembers = () => {
-    let processedMembers = [];
-    for (const member of en_members) {
-        if (member.properties.Nom.title.length > 0 && member.properties.Image.files.length > 0 && member.properties.Fonction.rich_text.length > 0) {
-            processedMembers.push({
-                name: member.properties.Nom.title[0].plain_text,
-                image: member.properties.Image.files[0].file.url,
-                role: member.properties.Fonction.rich_text[0].plain_text,
-                email: member.properties.Email.email,
-                phone: member.properties.Telephone.phone_number,
-                instagram: member.properties.Instagram.url,
-            })
-        }
-    }
-
-    processedMembers.reverse();
-
-    return processedMembers;
-}
+    return en_members
+        .filter(member => member.properties.Nom.title.length > 0 && member.properties.Image.files.length > 0 && member.properties.Fonction.rich_text.length > 0)
+        .map(member => ({
+            name: member.properties.Nom.title[0].plain_text,
+            image: member.properties.Image.files[0].file.url,
+            role: member.properties.Fonction.rich_text[0].plain_text,
+            email: member.properties.Email.email,
+            phone: member.properties.Telephone.phone_number,
+            instagram: member.properties.Instagram.url,
+        }))
+        .reverse();
+};
 
 export const getContacts = () => {
-    let processedContacts = [];
-    for (const contact of contacts) {
-        if (contact.properties.ID.title.length > 0 && contact.properties.Icone.rich_text.length > 0 && contact.properties.Email.email) {
-            processedContacts.push({
-                name: contact.properties.ID.title[0].plain_text,
-                icon: contact.properties.Icone.rich_text[0].plain_text,
-                email: contact.properties.Email.email,
-                id: contact.id
-            })
-        }
-    }
-
-    return processedContacts;
-}
+    return contacts
+        .filter(contact => contact.properties.ID.title.length > 0 && contact.properties.Icone.rich_text.length > 0 && contact.properties.Email.email)
+        .map(contact => ({
+            name: contact.properties.ID.title[0].plain_text,
+            icon: contact.properties.Icone.rich_text[0].plain_text,
+            email: contact.properties.Email.email,
+            id: contact.id,
+        }));
+};

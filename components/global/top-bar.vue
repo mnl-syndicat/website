@@ -101,7 +101,7 @@ if (props.internal) {
     </ul>
 
     <div class="nav-el buttons" v-show="menuToggled || !smallScreen">
-      <btn icon="ph:key-bold" label="Espace adhérent·e" href="/interne" @click="toggleNavMenu" weight="secondary"
+      <btn icon="ph:key-bold" label="Espace adhérent·e" :href="user ? '/interne' : '/auth/login'" @click="toggleNavMenu" weight="secondary"
            v-if="!internal"/>
       <btn icon="ph:house-bold" label="Site public" href="/" @click="toggleNavMenu" weight="secondary" v-if="internal"/>
       <btn icon="ph:user-plus-bold" :label="getString('joinButton')" href="/adherer" @click="toggleNavMenu"

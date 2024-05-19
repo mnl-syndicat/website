@@ -10,6 +10,7 @@ import federations from '~/static/federations.json';
 import communiques from '~/static/communiques.json';
 import en_members from '~/static/en_members.json';
 import contacts from '~/static/contacts.json';
+import {SupabaseClient} from "@supabase/supabase-js";
 
 const findPage = (id: string) => strings.find(
     string => string.properties.ID.rich_text[0]?.plain_text === id

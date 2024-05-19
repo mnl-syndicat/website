@@ -39,12 +39,15 @@ export const getValues = () => processEntries(values, [
     ['Icone', 'icon']
 ]);
 
-const generateDynamicData = () => ({
+const generateDynamicData = async (supabase: SupabaseClient) => ({
     federationCount: String(federations.filter(federation => federation.properties.Active.checkbox).length),
+    memberCount: (await supabase.rpc('count_current_memberships')).data,
 });
 
-export const getStatistics = () => {
-    const dynamicData = generateDynamicData();
+export const getStatistics = async () => {
+    const supabase = useSupabaseClient()
+
+    const dynamicData = await generateDynamicData(supabase);
     return statistics
         .filter(stat => stat.properties.ID.title.length > 0 && stat.properties.Valeur.rich_text.length > 0 && stat.properties.Icone.rich_text.length > 0)
         .map(stat => ({
@@ -54,6 +57,7 @@ export const getStatistics = () => {
                 ? dynamicData[stat.properties.Valeur.rich_text[0].plain_text.split(":")[1]] || "Error"
                 : stat.properties.Valeur.rich_text[0].plain_text,
             icon: stat.properties.Icone.rich_text[0].plain_text,
+            live: stat.properties.Valeur.rich_text[0].plain_text.startsWith("dynamic:"),
         }));
 };
 

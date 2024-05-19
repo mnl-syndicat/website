@@ -99,7 +99,7 @@ section {
       height: 40px;
     }
 
-    .icon {
+    .icon:not(h1 .icon) {
       font-size: 40px;
     }
 

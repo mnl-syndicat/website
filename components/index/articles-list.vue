@@ -10,10 +10,10 @@
     </div>
     <div class="articles card-grid">
       <article v-for="article in getArticles().slice(0, 5)" :key="article.link">
-        <router-link class="card" :to="'/article/' + article.link">
+        <NuxtLink class="card" :to="'/article/' + article.link">
           <NuxtImg height="300" :src="article.image" alt="" />
           <h3>{{ article.title }}</h3>
-        </router-link>
+        </NuxtLink>
       </article>
     </div>
   </section>

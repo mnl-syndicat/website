@@ -11,7 +11,7 @@ const props = defineProps({
 </script>
 
 <template>
-  <a :class="'btn ' + weight" :href="props.href"><Icon v-if="icon" :name="icon" /> {{props.label}}</a>
+  <NuxtLink :class="'btn ' + weight" :to="props.href"><Icon v-if="icon" :name="icon" /> {{props.label}}</NuxtLink>
 </template>
 
 <style scoped lang="scss">

@@ -48,7 +48,7 @@ onMounted(() => {
       document.querySelector('.departement' + federation.code.toLowerCase())!.classList.add('active');
 
       document.querySelector('.departement' + federation.code.toLowerCase())!.addEventListener('click', () => {
-        window.location.href = '/federation/' + federation.code;
+        navigateTo('/federation/' + federation.code);
       });
     }
   }
@@ -77,7 +77,7 @@ useHead({
 
         <div class="federation-list">
           <div v-for="federation in filteredFederations" :key="federation.code" class="federation">
-            <a :href="'/federation/' + federation.code">{{ federation.code }} {{ federation.name }}</a>
+            <NuxtLink :href="'/federation/' + federation.code">{{ federation.code }} {{ federation.name }}</NuxtLink>
           </div>
         </div>
       </div>

@@ -15,7 +15,18 @@ const fetchDatabase = async (databaseId: string) => {
         database_id: databaseId,
     });
 
-    return response.results;
+    let items = response.results;
+
+    if (response.next_cursor) {
+        const nextResponse = await notion.databases.query({
+            database_id: databaseId,
+            start_cursor: response.next_cursor
+        });
+
+        items = items.concat(nextResponse.results);
+    }
+
+    return items;
 }
 
 async function downloadImage(url: string, imagePath: string) {

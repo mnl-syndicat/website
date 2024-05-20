@@ -7,7 +7,6 @@ export default defineNuxtConfig({
         "@nuxtjs/sitemap",
         "@nuxtjs/supabase",
         '@nuxtjs/robots',
-        '@nuxtjs/sentry',
     ],
 
     supabase: {
@@ -42,32 +41,6 @@ export default defineNuxtConfig({
       }
     },
 
-    // @ts-ignore
-    sentry: {
-        dsn: process.env.SENTRY_SDN,
-        config: {
-            environment: process.env.NODE_ENV,
-            release: process.env.NUXT_ENV_VERCEL_GIT_COMMIT_SHA || process.env.NUXT_ENV_CURRENT_GIT_SHA || 'latest',
-        },
-        clientIntegrations: {
-            Replay: {}
-        },
-        clientConfig: {
-            replaysSessionSampleRate: 0.3,
-            replaysOnErrorSampleRate: 1.0,
-        },
-        publishRelease: {
-            authToken: process.env.SENTRY_AUTH_TOKEN,
-            org: 'mnl-syndicat',
-            project: 'website',
-            release: {
-                setCommits: {
-                    auto: true
-                }
-            }
-        }
-    },
-
     css: [
         '@/node_modules/normalize.css/normalize.css',
         '@/static/scss/base.scss',
@@ -100,6 +73,10 @@ export default defineNuxtConfig({
     runtimeConfig: {
         public: {
             COMMIT_SHA: process.env.NUXT_ENV_VERCEL_GIT_COMMIT_SHA || process.env.NUXT_ENV_CURRENT_GIT_SHA || 'latest',
+            sentry: {
+                dsn: "https://d23dc40e8c2bf00285ebe53583f31abd@o4507288114823168.ingest.de.sentry.io/4507288117968976",
+                environment: process.env.NODE_ENV
+            }
         }
     },
 

@@ -29,9 +29,7 @@ onMounted(() => {
     link.setAttribute('href', '/federation/' + fedeCode + link.getAttribute('href'));
   });
 
-  console.log(
-
-  title.value = Object.values(toRaw(blockMap.value) as Object)[0].value.properties.title[0][0]);
+  title.value = Object.values(toRaw(blockMap.value) as Object)[0].value.properties.title[0][0];
 
   useHead({
     title: `MNL ${federation.code} — ${title.value}`,

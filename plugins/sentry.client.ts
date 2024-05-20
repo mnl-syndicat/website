@@ -4,8 +4,6 @@ export default defineNuxtPlugin((nuxtApp) => {
     const router = useRouter()
     const { public: { sentry } } = useRuntimeConfig()
 
-    console.log(sentry)
-
     if (!sentry.dsn) {
         return
     }

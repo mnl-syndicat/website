@@ -16,7 +16,6 @@ export default defineNuxtPlugin((nuxtApp) => {
         environment: sentry.environment,
         integrations: [
             Sentry.browserTracingIntegration({ router }),
-            Sentry.replayIntegration()
         ],
 
         tracesSampleRate: 0.2,

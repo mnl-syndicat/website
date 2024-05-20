@@ -7,6 +7,7 @@ export default defineNuxtConfig({
         "@nuxtjs/sitemap",
         "@nuxtjs/supabase",
         '@nuxtjs/robots',
+        '@nuxtjs/sentry',
     ],
 
     supabase: {
@@ -39,6 +40,32 @@ export default defineNuxtConfig({
           ignoreLocalhost: true,
           version: 2
       }
+    },
+
+    // @ts-ignore
+    sentry: {
+        dsn: process.env.SENTRY_SDN,
+        config: {
+            environment: process.env.NODE_ENV,
+            release: process.env.NUXT_ENV_VERCEL_GIT_COMMIT_SHA || process.env.NUXT_ENV_CURRENT_GIT_SHA || 'latest',
+        },
+        clientIntegrations: {
+            Replay: {}
+        },
+        clientConfig: {
+            replaysSessionSampleRate: 0.3,
+            replaysOnErrorSampleRate: 1.0,
+        },
+        publishRelease: {
+            authToken: process.env.SENTRY_AUTH_TOKEN,
+            org: 'mnl-syndicat',
+            project: 'website',
+            release: {
+                setCommits: {
+                    auto: true
+                }
+            }
+        }
     },
 
     css: [

@@ -6,9 +6,21 @@ const pageId = route.params.page;
 const federation = getFederations().find(federation => federation.code === fedeCode)!;
 const title = ref('');
 
+if (!federation) {
+  throw createError ({
+    statusCode: 404
+  })
+}
+
 const {data: blockMap} = useAsyncData(federation.notionId, () =>
     $notion.getPageBlocks(pageId)
 );
+
+if (!blockMap) {
+  throw createError ({
+    statusCode: 404
+  })
+}
 
 
 onMounted(() => {

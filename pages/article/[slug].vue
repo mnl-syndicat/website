@@ -3,7 +3,14 @@ const route = useRoute()
 const {$notion} = useNuxtApp();
 const articleSlug = route.params.slug;
 
+
 const article = getArticles().find(article => article.link === articleSlug)!;
+
+if (!article) {
+  throw createError ({
+    statusCode: 404
+  })
+}
 
 const {data: blockMap} = useAsyncData(article.link, () =>
     $notion.getPageBlocks(article.id)
@@ -24,19 +31,28 @@ onMounted(() => {
 useHead({
   title: article.title + ' - MNL',
   meta: [
-    { name: 'description', content: "Un article du MNL, premier syndicat lycéen écologiste, antiraciste, antifasciste et révolutionnaire !" },
-    { name: 'og:title', content: article.title },
-    { name: 'og:description', content: "Un article du MNL, premier syndicat lycéen écologiste, antiraciste, antifasciste et révolutionnaire !" },
-    { name: 'og:image', content: article.image },
-    { name: 'og:time', content: article.date },
+    {
+      name: 'description',
+      content: "Un article du MNL, premier syndicat lycéen écologiste, antiraciste, antifasciste et révolutionnaire !"
+    },
+    {name: 'og:title', content: article.title},
+    {
+      name: 'og:description',
+      content: "Un article du MNL, premier syndicat lycéen écologiste, antiraciste, antifasciste et révolutionnaire !"
+    },
+    {name: 'og:image', content: article.image},
+    {name: 'og:time', content: article.date},
   ],
 });
 </script>
 
 <template>
-  <top-bar current-tab="/articles" />
+  <top-bar current-tab="/articles"/>
   <section id="article">
-    <h1><Icon name="ph:newspaper-clipping-bold" /> {{ article.title }}</h1>
+    <h1>
+      <Icon name="ph:newspaper-clipping-bold"/>
+      {{ article.title }}
+    </h1>
 
     <NotionRenderer
         :blockMap="blockMap"

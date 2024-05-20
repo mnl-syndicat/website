@@ -20,7 +20,7 @@ export default defineNuxtConfig({
     robots: {
       rules: {
           UserAgent: '*',
-          Disallow: '/interne',
+          Disallow: ['/interne', '/auth/new-password', '/auth/reset-password'],
       }
     },
 
@@ -74,5 +74,29 @@ export default defineNuxtConfig({
         public: {
             COMMIT_SHA: process.env.NUXT_ENV_VERCEL_GIT_COMMIT_SHA || process.env.NUXT_ENV_CURRENT_GIT_SHA || 'latest',
         }
-    }
+    },
+
+    routeRules: {
+        '/news': {
+            redirect: '/articles',
+        },
+        '/news/le-mnl-integre-lobessu': {
+            redirect: '/communique/mnl-integre-obessu',
+        },
+        '/actualites': {
+            redirect: '/articles',
+        },
+        '/login': {
+            redirect: '/auth/login',
+        },
+        '/register': {
+            redirect: '/auth/register',
+        },
+        '/formation-blocus': {
+            redirect: '/article/guide-blocus',
+        },
+        '/ou-sommes-nous': {
+            redirect: '/federations',
+        }
+    },
 })

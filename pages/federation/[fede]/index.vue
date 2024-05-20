@@ -4,6 +4,12 @@ const {$notion} = useNuxtApp();
 const fedeCode = route.params.fede;
 const federation = getFederations().find(federation => federation.code === fedeCode)!;
 
+if (!federation) {
+  throw createError ({
+    statusCode: 404
+  })
+}
+
 const {data: blockMap} = useAsyncData(federation.notionId, () =>
     $notion.getPageBlocks(federation.notionId)
 );

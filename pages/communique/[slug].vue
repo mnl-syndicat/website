@@ -5,6 +5,12 @@ const communiqueSlug = route.params.slug;
 
 const communique = getCommuniques().find(communique => communique.link === communiqueSlug)!;
 
+if (!communique) {
+    throw createError ({
+        statusCode: 404
+    })
+}
+
 const {data: blockMap} = useAsyncData(communique.link, () =>
     $notion.getPageBlocks(communique.id)
 );

@@ -20,9 +20,9 @@ const handleScroll = () => {
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll);
-  smallScreen.value = window.innerWidth < 768;
+  smallScreen.value = window.innerWidth < 1300;
   window.addEventListener('resize', () => {
-    smallScreen.value = window.innerWidth < 768;
+    smallScreen.value = window.innerWidth < 1300;
   });
 });
 
@@ -89,23 +89,24 @@ if (props.internal) {
       </h3>
       <router-link to="/"><img :src="getImage('orgLogo')" alt="Organization logo"></router-link>
       <router-link to="/interne" v-if="smallScreen && !internal" class="userIcon"><Icon name="ph:user-circle-bold" /></router-link>
+      <ul class="links-list" v-show="menuToggled || !smallScreen">
+        <li v-for="link in links" :key="link.label" :class="{ current: currentTab === link.path }">
+          <router-link :to="link.path">
+            <Icon :name="link.icon"/>
+            {{ link.label }}
+          </router-link>
+        </li>
+      </ul>
     </div>
 
-    <ul class="nav-el links-list" v-show="menuToggled || !smallScreen">
-      <li v-for="link in links" :key="link.label" :class="{ current: currentTab === link.path }">
-        <router-link :to="link.path">
-          <Icon :name="link.icon"/>
-          {{ link.label }}
-        </router-link>
-      </li>
-    </ul>
-
-    <div class="nav-el buttons" v-show="menuToggled || !smallScreen">
-      <btn icon="ph:key-bold" label="Espace adhérent·e" :href="user ? '/interne' : '/auth/login'" @click="toggleNavMenu" weight="secondary"
-           v-if="!internal"/>
-      <btn icon="ph:house-bold" label="Site public" href="/" @click="toggleNavMenu" weight="secondary" v-if="internal"/>
-      <btn icon="ph:user-plus-bold" :label="getString('joinButton')" href="/adherer" @click="toggleNavMenu"
-           v-if="!user"/>
+    <div class="nav-el">
+      <div class="buttons" v-show="menuToggled || !smallScreen">
+        <btn icon="ph:key-bold" label="Espace adhérent·e" :href="user ? '/interne' : '/auth/login'" @click="toggleNavMenu" weight="secondary"
+             v-if="!internal"/>
+        <btn icon="ph:house-bold" label="Site public" href="/" @click="toggleNavMenu" weight="secondary" v-if="internal"/>
+        <btn icon="ph:user-plus-bold" :label="getString('joinButton')" href="/adherer" @click="toggleNavMenu"
+             v-if="!user"/>
+      </div>
     </div>
   </header>
 </template>
@@ -118,7 +119,8 @@ header {
   height: 125px;
   z-index: 100;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 0 50px;
   border-bottom: 1px solid black;
   align-items: center;
   position: fixed;
@@ -147,9 +149,9 @@ header {
   .nav-el {
     display: flex;
     justify-content: center;
-    flex: 1;
+    gap: 40px;
 
-    &.buttons {
+    & .buttons {
       flex-wrap: wrap;
       justify-content: start;
     }
@@ -168,7 +170,6 @@ header {
     @include title-font;
     font-weight: 600;
     font-size: 18px;
-    flex: 2;
 
     li {
       a:not(.btn) {
@@ -213,15 +214,26 @@ header {
   }
 }
 
-@media (max-width: 768px) {
+
+@media (max-width: 1300px) {
   header {
     padding: 15px 25px;
     height: max-content;
     min-height: 80px;
     flex-direction: column;
+    align-items: start;
 
     &.scrolled {
       height: max-content;
+    }
+
+    .nav-el {
+      flex-wrap: wrap;
+      gap: 10px;
+
+      .links-list {
+        width: 100vw;
+      }
     }
 
     & .nav-el:first-child {

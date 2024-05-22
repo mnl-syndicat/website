@@ -311,6 +311,12 @@ input:not(.input-with-icon input), .input-with-icon, select {
   }
 }
 
+@media (max-width: 1300px) {
+  body {
+    padding-top: 80px;
+  }
+}
+
 @media (max-width: 768px) {
   section {
     padding: 30px 5vw;
@@ -323,10 +329,6 @@ input:not(.input-with-icon input), .input-with-icon, select {
 
   h3 {
     font-size: 24px;
-  }
-
-  body {
-    padding-top: 80px;
   }
 
   .icon-list {

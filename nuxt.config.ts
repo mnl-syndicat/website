@@ -70,6 +70,13 @@ export default defineNuxtConfig({
         },
     },
 
+    sitemap: {
+        sources: [
+            '/api/__sitemap__/urls',
+        ],
+        exclude: ["/interne", "/auth/new-password", "/auth/reset-password", "/interne/*"],
+    },
+
     runtimeConfig: {
         public: {
             COMMIT_SHA: process.env.NUXT_ENV_VERCEL_GIT_COMMIT_SHA || process.env.NUXT_ENV_CURRENT_GIT_SHA || 'latest',

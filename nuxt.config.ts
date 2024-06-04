@@ -108,6 +108,9 @@ export default defineNuxtConfig({
         },
         '/ou-sommes-nous': {
             redirect: '/federations',
+        },
+        '/lacrymo': {
+            redirect: '/article/lacrymo'
         }
     },
 })

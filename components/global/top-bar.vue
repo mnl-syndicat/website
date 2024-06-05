@@ -85,10 +85,10 @@ if (props.internal) {
     <div class="nav-el">
       <Icon :name="menuToggled ? 'mdi:close' : 'mdi:menu'" v-if="smallScreen" @click="toggleNavMenu()"/>
       <h3 v-if="smallScreen && internal">
-        <router-link to="/interne">INTERNE</router-link>
+        <router-link to="/auth/login">INTERNE</router-link>
       </h3>
       <router-link to="/"><img :src="getImage('orgLogo')" alt="Organization logo"></router-link>
-      <router-link to="/interne" v-if="smallScreen && !internal" class="userIcon"><Icon name="ph:user-circle-bold" /></router-link>
+      <router-link to="/auth/login" v-if="smallScreen && !internal" class="userIcon"><Icon name="ph:user-circle-bold" /></router-link>
       <ul class="links-list" v-show="menuToggled || !smallScreen">
         <li v-for="link in links" :key="link.label" :class="{ current: currentTab === link.path }">
           <router-link :to="link.path">

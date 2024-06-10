@@ -25,8 +25,7 @@ if (supabaseMembershipData.error) {
 } else {
   userData.value = supabaseMembershipData.data[0]
   const date_of_birth_date = new Date(userData.value.date_of_birth)
-  const date_of_birth_updated = date_of_birth_date.setDate(date_of_birth_date.getDate() + 1);
-  date_of_birth_string.value = new Date(date_of_birth_updated).toLocaleString('fr-FR', {
+  date_of_birth_string.value = new Date(date_of_birth_date).toLocaleString('fr-FR', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'

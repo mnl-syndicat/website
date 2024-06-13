@@ -119,12 +119,16 @@ const databases = [
         id: "4b5c34d870474f6592eaddd994b790a9"
     },
     {
-        name : "en_members",
-        id : "f4fec900df194977bb267da0023d7927"
+        name: "en_members",
+        id: "f4fec900df194977bb267da0023d7927"
     },
     {
-        name : "contacts",
-        id : "24288aed5d4f405f94f27c9027b6a9d3"
+        name: "contacts",
+        id: "24288aed5d4f405f94f27c9027b6a9d3"
+    },
+    {
+        name: "tools",
+        id: "0153c33d385547f8991a982423bddb1a"
     }
 ];
 

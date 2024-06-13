@@ -10,6 +10,7 @@ import federations from '~/static/federations.json';
 import communiques from '~/static/communiques.json';
 import en_members from '~/static/en_members.json';
 import contacts from '~/static/contacts.json';
+import tools from '~/static/tools.json';
 import {SupabaseClient} from "@supabase/supabase-js";
 
 const findPage = (id: string) => strings.find(
@@ -164,3 +165,16 @@ export const getContacts = () => {
         }))
         .sort((a, b) => a.name.localeCompare(b.name));
 };
+
+export const getTools = () => {
+    return tools
+        .filter(tool => tool.properties.ID.title.length > 0 && tool.properties.Description.rich_text.length > 0 && tool.properties.Icon.rich_text.length > 0 && tool.properties.URL.rich_text.length > 0)
+        .map(tool => ({
+            label: tool.properties.ID.title[0].plain_text,
+            description: tool.properties.Description.rich_text[0].plain_text,
+            icon: tool.properties.Icon.rich_text[0].plain_text,
+            path: tool.properties.URL.rich_text[0].plain_text,
+            en_only: tool.properties.EN.checkbox,
+        }))
+        .reverse();
+}

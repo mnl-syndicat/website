@@ -23,7 +23,9 @@ isEnMember.value = scopes.some((scope: { id: string; name: string }) => scope.na
 
 if (error) {
   console.error(error)
-} else if (isEnMember) {
+}
+
+if (isEnMember) {
   enLinks.value = getTools().filter(tool => tool.en_only === true)
 }
 
@@ -58,7 +60,7 @@ useHead(
     </div>
 
     <h2 v-if="isEnMember">Outils de l'équipe nationale</h2>
-    <div class="card-grid">
+    <div class="card-grid" v-if="isEnMember">
       <nuxt-link class="card" v-for="link in enLinks" :to="link.path" :key="link.path">
         <h3>
           <Icon :name="link.icon"/>

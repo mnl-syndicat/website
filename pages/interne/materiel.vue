@@ -22,3 +22,9 @@ useHead({
     </div>
   </section>
 </template>
+
+<style scoped lang="scss">
+.card-grid .card img {
+  object-fit: contain !important;
+}
+</style>

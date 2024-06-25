@@ -75,7 +75,9 @@ useHead(
 <style scoped lang="scss">
 .card-grid {
   gap: 15px;
-  width: calc(275px * 3 + 15px * 3);
+  width: calc(350px * 3 + 15px * 3);
+  max-width: 100vw;
+  justify-content: center;
 }
 
 .card {

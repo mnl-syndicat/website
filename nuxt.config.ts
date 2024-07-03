@@ -111,6 +111,9 @@ export default defineNuxtConfig({
         },
         '/lacrymo': {
             redirect: '/article/lacrymo'
+        },
+        '/federation/26': {
+            redirect: '/federation/07'
         }
     },
 })

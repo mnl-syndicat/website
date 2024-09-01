@@ -80,7 +80,7 @@ const downloadCard = async () => {
 
     <ClientOnly>
       <CarteAdherent :name="userData.first_name + ' ' + userData.last_name" :school="userData.school" :date="userData.date" :federation="userData.scopes[0].name"/> 
-      <btn label="Télécharger ma carte d'adhérent" icon="ph:download-bold" weight="secondary" @click="downloadCard" />
+      <btn label="Télécharger ma carte d'adhérent" icon="ph:download-bold" weight="secondary" @click="downloadCard" v-if="false" />
     </ClientOnly>
 
     <ul>

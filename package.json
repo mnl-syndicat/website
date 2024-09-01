@@ -17,7 +17,7 @@
     "@nuxtjs/sitemap": "^5.1.5",
     "@nuxtjs/supabase": "^1.2.2",
     "dotenv": "^16.4.5",
-    "nuxt": "^3.11.1",
+    "nuxt": "^3.12.4",
     "nuxt-umami": "^2.6.1",
     "sass": "^1.75.0",
     "vanilla-tilt": "^1.8.1",

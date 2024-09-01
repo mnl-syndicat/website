@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import CarteAdherent from '~/components/profile/CarteAdherent.vue'
 const user = useSupabaseUser()
 const supabase = useSupabaseClient()
 const userData = ref({
@@ -7,6 +8,7 @@ const userData = ref({
   phone_number: '',
   school: '',
   date_of_birth: '',
+  date: '',
   scopes: [{name: ''}]
 })
 const date_of_birth_string = ref('')
@@ -17,6 +19,7 @@ const supabaseMembershipData = await supabase.from('memberships').select(`
     first_name,
     last_name,
     phone_number,
+    date,
     school,
     scopes (id, name)
   `).eq('id', user.value!.id)
@@ -44,7 +47,29 @@ useHead({
     {name: 'og:title', content: 'Mon profil — Mouvement National Lycéen'},
     {name: 'og:description', content: 'Profil de l\'utilisateur sur le site du Mouvement National Lycéen'},
   ],
-})
+});
+
+const downloadCard = async () => {
+  const svg = document.querySelector('.carte-adherent-wrapper')
+  const canvas = document.createElement('canvas')
+  const context = canvas.getContext('2d')
+  const data = new XMLSerializer().serializeToString(svg!);
+  const win = window.URL || window.webkitURL || window
+  const img = new Image()
+  const blob = new Blob([data], {type: 'image/svg+xml'})
+  const url = win.createObjectURL(blob)
+  img.src = url
+
+  img.onload = () => {
+    canvas.width = img.width
+    canvas.height = img.height
+    context?.drawImage(img, 0, 0)
+    const a = document.createElement('a')
+    a.download = 'carte-adherent.png'
+    a.href = canvas.toDataURL('image/png')
+    a.click()
+  }
+}
 </script>
 
 <template>
@@ -53,6 +78,10 @@ useHead({
 
     <h1>MON PROFIL</h1>
 
+    <ClientOnly>
+      <CarteAdherent :name="userData.first_name + ' ' + userData.last_name" :school="userData.school" :date="userData.date" :federation="userData.scopes[0].name"/> 
+      <btn label="Télécharger ma carte d'adhérent" icon="ph:download-bold" weight="secondary" @click="downloadCard" />
+    </ClientOnly>
 
     <ul>
       <li>
@@ -102,6 +131,19 @@ ul {
     display: flex;
     gap: 5px;
     align-items: center;
+  }
+}
+</style>
+
+<style lang="scss">
+.carte-adherent-wrapper {
+  border-radius: 14px;
+  width: clamp(300px, 600px, 80vw);
+
+  svg {
+    border-radius: 14px;
+    width: 100%;
+    height: 100%;
   }
 }
 </style>

@@ -13,7 +13,7 @@ useHead({
   <top-bar />
   <section id="adherer">
     <h1>ADHÉRER</h1>
-    <iframe :src="getString('adhererLink')"></iframe>
+    <iframe :src="getString('adhererLink') + '/widget'"></iframe>
   </section>
 </template>
 

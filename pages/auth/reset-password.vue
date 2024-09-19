@@ -4,6 +4,7 @@ const email = ref('')
 const modalMessage = ref('')
 const modalType = ref<'error' | 'information'>('error')
 const openModal = ref(false)
+const isLoading = ref(false)
 
 const resetPassword = async () => {
   if (!email.value) {
@@ -13,10 +14,13 @@ const resetPassword = async () => {
     return
   }
 
+  isLoading.value = true
+
   const {error} = await supabase.auth.resetPasswordForEmail(email.value, {
     redirectTo: `${window.location.origin}/auth/new-password`,
   })
 
+  isLoading.value = false
 
   if (error) {
     modalMessage.value = error.message
@@ -51,7 +55,12 @@ useHead({
         <Icon name="ph:envelope-simple-bold"/>
         Email</label>
       <input v-model="email" type="email" />
-      <btn label="Réinitialiser" icon="ph:lock-bold" @click="resetPassword" />
+      <btn 
+        :label="isLoading ? 'En cours...' : 'Réinitialiser'" 
+        :icon="isLoading ? 'ph:spinner' : 'ph:lock-bold'" 
+        :disabled="isLoading" 
+        @click="resetPassword" 
+      />
     </div>
   </section>
 </template>

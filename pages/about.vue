@@ -11,12 +11,12 @@ useHead({
 
 <template>
   <top-bar current-tab="/about" />
-  <about-where/>
+  <about-paragraph-section :title="getString('whereCategoryName')" :paragraph="getString('whereValue')" :imageUrl="getImage('valuesIllus')" :buttonLabel="getString('whereButton')" buttonUrl="/federations/" buttonIcon="ph:map-trifold-bold" />
   <about-missions/>
   <about-equipe-nationale/>
-  <about-interne/>
-  <about-cit/>
-  <about-history/>
+  <about-paragraph-section :title="getString('interneCategoryName')" :paragraph="getString('interneValue')" :imageUrl="getImage('interneCategoryImage')" :buttonLabel="getString('statusButtonLabel')" :buttonUrl="getString('statusFileUrl')" buttonIcon="ph:download-bold" />
+  <about-paragraph-section :title="getString('citCategoryName')" :paragraph="getString('citValue')" :imageUrl="getImage('citCategoryImage')" image-location="left"/>
+  <about-paragraph-section :title="getString('historyCategoryName')" :paragraph="getString('historyValue')" :imageUrl="getImage('historyCategoryImage')" />
   <socials/>
 
 </template>

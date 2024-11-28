@@ -1,6 +1,6 @@
 <script setup lang="ts">
 useHead({
-  title: 'Mouvement National Lycéen',
+  title: 'Mouvement National Lycéen - Premier syndicat lycéen écologiste, antiraciste, antifasciste et révolutionnaire !',
   meta: [
     { charset: 'utf-8' },
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },

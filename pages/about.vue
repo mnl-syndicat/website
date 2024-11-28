@@ -15,6 +15,7 @@ useHead({
   <about-missions/>
   <about-equipe-nationale/>
   <about-interne/>
+  <about-cit/>
   <about-history/>
   <socials/>
 

@@ -7,6 +7,7 @@ const canvasRef = ref<HTMLCanvasElement>()
 const brightness = ref(115)
 const contrast = ref(134)
 const loading = ref(false)
+const color = ref('#5A2783')
 
 const updateCanvas = async () => {
   const file = ref<File>()
@@ -120,6 +121,11 @@ useHead({
           Contraste</label>
         <input type="range" min="0" max="300" step="1" v-model="contrast"/>
 
+        <label>
+          <Icon name="ph:palette-bold" />
+          Couleurs</label>
+        <input type="color" v-model="color"/>
+
         <btn label="Télécharger" icon="ph:download-bold" @click="downloadImage" v-if="!loading"/>
         <btn label="Patientez" icon="ph:hourglass-bold" v-else/>
       </div>
@@ -137,8 +143,8 @@ useHead({
         </defs>
         <rect width="100%" height="100%" fill="url(#pattern0)"
               :style="'filter: saturate(0%) contrast(' + contrast + '%) brightness(' + brightness + '%)'"/>
-        <rect width="100%" height="100%" fill="#5A2783" fill-opacity="0.3"/>
-        <rect width="100%" height="100%" fill="#5A2783" fill-opacity="0.2" style="mix-blend-mode: overlay"/>
+        <rect width="100%" height="100%" :fill="color" fill-opacity="0.3"/>
+        <rect width="100%" height="100%" :fill="color" fill-opacity="0.2" style="mix-blend-mode: overlay"/>
         <rect width="100%" height="100%" fill="url(#pattern1)" fill-opacity="0.8" style="mix-blend-mode: overlay"/>
       </svg>
     </div>
